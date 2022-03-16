@@ -7,25 +7,11 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/text"
-        android:layout_width="330dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="40dp"
-        android:gravity="right"
-        android:text=""
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtResult"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="65dp" />
-
-    <TextView
         android:id="@+id/txtResult"
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:layout_marginBottom="96dp"
         android:gravity="right"
-        android:text="0"
         android:textColor="@color/black"
         android:textSize="34sp"
         android:textStyle="bold"
