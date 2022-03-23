@@ -2,13 +2,16 @@ package com.example.week03;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    Button btnExit;
     int[] voteCount;
     ImageView[] image;
     String[] imgName = {"그림1","그림2","그림3","그림4",
@@ -39,5 +42,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+        btnExit = (Button) findViewById(R.id.btnExit);
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentHitCount = new Intent(getApplicationContext(), VoteResult.class);
+                intentHitCount.putExtra("voteCount", voteCount);
+                intentHitCount.putExtra("imageName", imgName);
+                startActivity(intentHitCount);
+            }
+        });
     }
 }
