@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btnDial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("tel:010");
+                Uri uri = Uri.parse("tel:01052967638");
                 Intent intent = new Intent(Intent.ACTION_DIAL, uri);
                 startActivity(intent);
             }
@@ -74,9 +75,10 @@ public class MainActivity extends AppCompatActivity {
         btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                Uri uri = Uri.fromFile(new File("/sdcard/jeju12.jpg"));
-                startActivity(intent);
+                Intent mIntent = new Intent(Intent.ACTION_PICK,Uri.parse("content://media/internal/images/media/"));
+                Uri uri = Uri.parse("/storage/emulated/0/pic.jpg");
+                mIntent.setDataAndType(uri, "image/*");
+                startActivity(mIntent);
             }
         });
     }
