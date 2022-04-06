@@ -16,7 +16,7 @@ public class ListViewItem {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {

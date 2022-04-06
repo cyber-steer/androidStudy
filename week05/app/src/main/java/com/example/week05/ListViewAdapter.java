@@ -15,20 +15,17 @@ public class ListViewAdapter extends BaseAdapter {
 
     private ArrayList<ListViewItem> listViewItems = new ArrayList<ListViewItem>();
 
+    public ListViewAdapter(){
 
-
+    }
     @Override
     public int getCount() { return listViewItems.size(); }
 
     @Override
-    public Object getItem(int i) {
-        return listViewItems.get(i);
-    }
+    public Object getItem(int i) { return listViewItems.get(i);}
 
     @Override
-    public long getItemId(int i) {
-        return i;
-    }
+    public long getItemId(int i) { return i; }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
@@ -50,7 +47,7 @@ public class ListViewAdapter extends BaseAdapter {
         TextView titleTextView = (TextView) view.findViewById(R.id.textView1);
         TextView descTextView = (TextView) view.findViewById(R.id.textView2);
 
-        ListViewItem listViewItem = listViewItems.get(pos);
+        ListViewItem listViewItem = listViewItems.get(i);
 
         iconImageView.setImageDrawable(listViewItem.getIcon());
         titleTextView.setText(listViewItem.getTitle());

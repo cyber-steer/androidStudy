@@ -37,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 ListViewItem item = (ListViewItem) adapterView.getItemAtPosition(i);
 
+                System.out.println("============================"+item);
                 String titleStr = item.getTitle();
-                String descStr = item.getDescription();
-                Drawable iconDrawble = item.getIcon();
+                //String descStr = item.getDescription();
+                //Drawable iconDrawble = item.getIcon();
 
                 Toast.makeText(MainActivity.this, titleStr, Toast.LENGTH_SHORT).show();
             }
