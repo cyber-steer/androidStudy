@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:spacing="20dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:unselectedAlpha="0.2"/>
 
     <ImageView
         android:id="@+id/imageView2"
