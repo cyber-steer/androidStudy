@@ -6,4 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".Result">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="돌아가기" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
