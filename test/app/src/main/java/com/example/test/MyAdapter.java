@@ -45,7 +45,7 @@ public class MyAdapter extends BaseAdapter {
 
         imageView.setImageResource(item.getImgId());
         name.setText(item.getName());
-        name.setText(item.getCount()+"");
+        count.setText(item.getCount()+"");
 
         return view;
     }
