@@ -5,12 +5,6 @@ public class Item {
     private int count;
     private String name;
 
-    public Item(int imgId, int count, String name) {
-        this.imgId = imgId;
-        this.count = count;
-        this.name = name;
-    }
-
     public int getImgId() {
         return imgId;
     }
@@ -32,6 +26,13 @@ public class Item {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public Item(int imgId, int count, String name) {
+
+        this.imgId = imgId;
+        this.count = count;
         this.name = name;
     }
 }

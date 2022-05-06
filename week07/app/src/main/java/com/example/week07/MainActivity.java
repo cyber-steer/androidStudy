@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
                     http.setRequestProperty("content-type", "application/x-www-form-urlencoded");
                     StringBuffer buffer = new StringBuffer();
                     buffer.append("name").append("=").append(sname).append("/").append(scall).append("/").append(smail).append("/");
-                    OutputStreamWriter outStream = new OutputStreamWriter(http.getOutputStream(), "euc-kr");
+                    OutputStreamWriter outStream = new OutputStreamWriter(http.getOutputStream(), "utf-8");
                     outStream.write(buffer.toString());
                     outStream.flush();
-                    InputStreamReader tmp = new InputStreamReader(http.getInputStream(), "euc-kr");
+                    InputStreamReader tmp = new InputStreamReader(http.getInputStream(), "utf-8");
                     final BufferedReader redear = new BufferedReader(tmp);
                     while(redear.readLine() != null)
                     {
