@@ -35,10 +35,14 @@ public class CustomTask extends AsyncTask<String, Void, String> {
             osw.flush();
             if(con.getResponseCode() == con.HTTP_OK){
                 InputStreamReader tmp = new InputStreamReader(con.getInputStream(),"UTF-8");
+                System.out.println("tmp : "+tmp.toString());
                 BufferedReader reader = new BufferedReader(tmp);
+                System.out.println("reader : "+reader.toString());
                 StringBuffer buffer = new StringBuffer();
                 while((str = reader.readLine())!=null){
+                    System.out.println("str : "+str);
                     buffer.append(str);
+                    System.out.println("buffer : "+buffer.toString());
                 }
                 receiveMsg = buffer.toString();
             }else{
