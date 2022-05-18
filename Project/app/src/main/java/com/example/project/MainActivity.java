@@ -10,8 +10,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    TextView toolbarName;
     DrawerLayout drawerLayout;
 
     @Override
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+        toolbarName = findViewById(R.id.toolbarName);
+        toolbarName.setText("메인");
     }
 
     public void ClickMenu(View view){

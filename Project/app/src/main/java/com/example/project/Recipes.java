@@ -5,9 +5,22 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.project.adapter.DbConect;
+import com.example.project.adapter.RecipesAdapter;
+import com.example.project.model.RecipesDto;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class Recipes extends AppCompatActivity {
+    TextView toolbarName;
     DrawerLayout drawerLayout;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +28,59 @@ public class Recipes extends AppCompatActivity {
         setContentView(R.layout.activity_recipes);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+        toolbarName = findViewById(R.id.toolbarName);
+        toolbarName.setText("레시피");
+        tabLayout = findViewById(R.id.tabLayout);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                ArrayList<RecipesDto> dtos = new ArrayList<>();
+                String base = (String)tab.getContentDescription();
+                ListView listView = findViewById(R.id.listView);
+                RecipesAdapter adapter = new RecipesAdapter();
+                listView.setAdapter(adapter);
+
+                String result="";
+                DbConect conect = new DbConect();
+                try {
+                    result = conect.execute("selectBase","recipes",base).get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if(result.equals("fail")){
+                    Toast.makeText(Recipes.this, "검색결과가 없습니다", Toast.LENGTH_SHORT).show();
+                }
+                else if(result.equals("error")){
+                    Toast.makeText(Recipes.this, "에러 발생", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String[] results = result.split(" ");
+                    for(int i=0; i<results.length;){
+                        RecipesDto dto = new RecipesDto();
+                        dto.setName(results[i++]);
+                        dto.setProof(results[i++]);
+                        dtos.add(dto);
+                    }
+                    for(RecipesDto dto : dtos){
+                        adapter.addItem(dto);
+                    }
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
     }
 
     public void ClickMenu(View view){

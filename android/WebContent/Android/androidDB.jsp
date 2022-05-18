@@ -1,19 +1,25 @@
-<%@page import="com.db.ConnectDB"%>
+
+<%@page import="com.model.RecipesDao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String name = request.getParameter("name");
-	String telno = request.getParameter("telno");
-	String email = request.getParameter("email");
 	String type = request.getParameter("type");
-	
-	ConnectDB connectDB = ConnectDB.getInstans();
+	String table = request.getParameter("table");
+	String base = request.getParameter("base");
+
+	System.out.println("type"+type);
+	System.out.println("table"+table);
+	System.out.println("base"+base);
+	RecipesDao dao = new RecipesDao();
 	if(type.equals("insert")) {
-		out.print(connectDB.insert(name,telno,email));	
+	}
+	else if(type.equals("selectBase")){
+		if(table.equals("recipes")){
+			out.print(dao.selectBase(base));
+		}
 	}
 	else if(type.equals("select")){
-		out.print(connectDB.select(name));
 	}
 
 %>

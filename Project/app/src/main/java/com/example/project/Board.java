@@ -5,8 +5,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class Board extends AppCompatActivity {
+    TextView toolbarName;
     DrawerLayout drawerLayout;
 
     @Override
@@ -15,6 +17,8 @@ public class Board extends AppCompatActivity {
         setContentView(R.layout.activity_board);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+        toolbarName = findViewById(R.id.toolbarName);
+        toolbarName.setText("게시판");
     }
 
     public void ClickMenu(View view){

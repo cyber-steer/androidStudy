@@ -53,6 +53,9 @@ public class ConnectDB {
 		}
 		return returns;
 	}
+	public String select() {
+		return "";
+	}
 	public String select(String name) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
