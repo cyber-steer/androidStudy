@@ -6,7 +6,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.View;
 
-public class AboutUs extends AppCompatActivity {
+public class Info extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
     @Override
@@ -20,6 +20,9 @@ public class AboutUs extends AppCompatActivity {
     public void ClickMenu(View view){
         MainActivity.openDrawer(drawerLayout);
     }
+    public void ClickRecipes(View view){
+        MainActivity.redirectActivity(this,Recipes.class);
+    }
 
     public void ClickLogo(View view){
         MainActivity.closeDrawer(drawerLayout);
@@ -29,15 +32,15 @@ public class AboutUs extends AppCompatActivity {
         MainActivity.redirectActivity(this, MainActivity.class);
     }
 
-    public void ClickDashboard(View view){
-        MainActivity.redirectActivity(this,Dashboard.class);
+    public void ClickBoard(View view){
+        MainActivity.redirectActivity(this, Board.class);
     }
-    public void ClickAboutUs(View view){
+    public void ClickInfo(View view){
         recreate();
     }
 
-    public void ClickLogout(View view){
-        MainActivity.logout(this);
+    public void ClickExit(View view){
+        MainActivity.exit(this);
     }
 
     @Override

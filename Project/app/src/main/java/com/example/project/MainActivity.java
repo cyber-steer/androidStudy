@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,30 +44,33 @@ public class MainActivity extends AppCompatActivity {
         recreate();
     }
 
-    public void ClickDashboard(View view){
-        redirectActivity(this,Dashboard.class);
+    public void ClickRecipes(View view){
+        redirectActivity(this,Recipes.class);
+    }
+    public void ClickBoard(View view){
+        redirectActivity(this, Board.class);
     }
 
-    public void ClickAboutUs(View view){
-        redirectActivity(this,AboutUs.class);
+    public void ClickInfo(View view){
+        redirectActivity(this, Info.class);
     }
 
-    public void ClickLogout(View view){
-        logout(this);
+    public void ClickExit(View view){
+        exit(this);
     }
 
-    public static void logout(Activity activity) {
+    public static void exit(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Logout");
-        builder.setMessage("Are you sure want to logout?");
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setTitle("종료");
+        builder.setMessage("종료하겠습니까?");
+        builder.setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 activity.finishAffinity();
                 System.exit(0);
             }
         });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

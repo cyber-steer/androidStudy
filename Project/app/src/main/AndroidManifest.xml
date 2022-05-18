@@ -10,14 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project">
         <activity
-            android:name=".AboutUs"
-            android:exported="false" />
+            android:name=".Recipes"
+            android:exported="false"
+            android:theme="@style/Theme.Project.NoActionBar" />
         <activity
-            android:name=".Dashboard"
-            android:exported="false" />
+            android:name=".Info"
+            android:exported="false"
+            android:theme="@style/Theme.Project.NoActionBar" />
+        <activity
+            android:name=".Board"
+            android:exported="false"
+            android:theme="@style/Theme.Project.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Project.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
