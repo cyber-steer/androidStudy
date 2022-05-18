@@ -16,13 +16,77 @@
         <include
             layout="@layout/main_toolbar"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Home"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:orientation="vertical"
+            android:layout_margin="60dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/circle"
+                    android:text="보드카"
+                    android:textSize="29dp"
+                    android:layout_marginRight="50dp"/>
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/circle"
+                    android:text="데킬라"
+                    android:textSize="29dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/circle"
+                    android:text="진"
+                    android:textSize="29dp"
+                    android:layout_marginRight="50dp"/>
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/circle"
+                    android:text="브랜디"
+                    android:textSize="29dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/circle"
+                    android:text="럼"
+                    android:textSize="29dp"
+                    android:layout_marginRight="50dp"/>
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/circle"
+                    android:text="위스키"
+                    android:textSize="29dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
     <RelativeLayout
