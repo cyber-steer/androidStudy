@@ -24,14 +24,13 @@ public class DbConect extends AsyncTask<String, Void, String> {
             con.setRequestMethod("POST");
             OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream(),"UTF-8");
 
-            if(strings[0].equals("insert")) {
-                sendMsg = "type=" + strings[0] + "&name=" + strings[1] + "&telno=" + strings[2] + "&email=" + strings[3];
-                System.out.println(sendMsg);
-            }
-            else if(strings[0].equals("selectBase")){
+            if(strings[0].equals("selectBase")){
                 if(strings[1].equals("recipes")){
                     sendMsg = "type="+strings[0]+"&table="+strings[1]+"&base="+strings[2];
                 }
+            }
+            else if(strings[0].equals("updateFavorite")){
+                sendMsg = "type="+strings[0]+"&table="+strings[1]+"&name="+strings[2]+"&favorite="+strings[3];
             }
 
             osw.write(sendMsg);
