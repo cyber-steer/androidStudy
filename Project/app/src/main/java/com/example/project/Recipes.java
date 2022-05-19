@@ -71,6 +71,9 @@ public class Recipes extends AppCompatActivity {
     public void ClickRecipes(View view){
         recreate();
     }
+    public void ClickFavorite(View view){
+        MainActivity.redirectActivity(this,Favorite.class);
+    }
 
     public void ClickHome(View view){
         MainActivity.redirectActivity(this, MainActivity.class);

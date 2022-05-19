@@ -5,7 +5,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.project.adapter.FavoriteAdapter;
 
 public class Board extends AppCompatActivity {
     TextView toolbarName;
@@ -19,6 +22,7 @@ public class Board extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
         toolbarName.setText("게시판");
+
     }
 
     public void ClickMenu(View view){
@@ -30,6 +34,9 @@ public class Board extends AppCompatActivity {
     }
     public void ClickRecipes(View view){
         MainActivity.redirectActivity(this,Recipes.class);
+    }
+    public void ClickFavorite(View view){
+        MainActivity.redirectActivity(this,Favorite.class);
     }
 
     public void ClickHome(View view){

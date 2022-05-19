@@ -54,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     public void ClickBoard(View view){
         redirectActivity(this, Board.class);
     }
+    public void ClickFavorite(View view){
+        redirectActivity(this, Favorite.class);
+    }
 
     public void ClickInfo(View view){
         redirectActivity(this, Info.class);

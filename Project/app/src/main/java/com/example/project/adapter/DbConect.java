@@ -32,7 +32,9 @@ public class DbConect extends AsyncTask<String, Void, String> {
             else if(strings[0].equals("updateFavorite")){
                 sendMsg = "type="+strings[0]+"&table="+strings[1]+"&name="+strings[2]+"&favorite="+strings[3];
             }
-
+            else if(strings[0].equals("selectFavorite")){
+                sendMsg = "type="+strings[0]+"&table="+strings[1];
+            }
             osw.write(sendMsg);
             osw.flush();
             if(con.getResponseCode() == con.HTTP_OK){

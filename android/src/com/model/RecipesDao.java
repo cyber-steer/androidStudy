@@ -78,4 +78,37 @@ public class RecipesDao {
 		}
 		return returns;
 	}
+
+	public String selectFavorite() {
+		ArrayList<RecipesDto> dtos = new ArrayList<RecipesDto>();
+		String sql = "SELECT name, proof, favorite FROM recipes where favorite=true;";
+		String returns="fail";
+		try (
+			Connection con = getConnection();
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+		){
+			while(rs.next()) {
+				RecipesDto dto = new RecipesDto();
+				dto.setName(rs.getString("name"));
+				dto.setProof(rs.getDouble("proof"));
+				dto.setFavorite(rs.getBoolean("favorite"));
+				dtos.add(dto);
+			}
+
+			if(dtos.size() >0) {
+				returns = "";
+				for(RecipesDto dto :dtos) {
+					returns += dto.getName() +",";
+					returns += dto.getProof() +",";
+					returns += dto.isFavorite()+",";
+				}
+			}
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
 }

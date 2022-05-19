@@ -27,5 +27,10 @@
 			out.print(dao.updateFavorite(name, favorite));
 		}
 	}
+	else if(type.equals("selectFavorite")){
+		if(table.equals("recipes")){
+			out.print(dao.selectFavorite());
+		}
+	}
 
 %>
