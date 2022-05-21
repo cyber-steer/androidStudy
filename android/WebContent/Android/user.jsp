@@ -8,12 +8,14 @@
 	String type = request.getParameter("type");
 	String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");
-	String nickName = request.getParameter("nickname");
-
+	String nickName = request.getParameter("nickName");
 	UserDao dao = new UserDao();
 	
 	if(type.equals("userCheck")){
-		System.out.println("dao.userCHeck : "+dao.userCheck(id, pwd));
 		out.print(dao.userCheck(id, pwd));
+	}
+	else if(type.equals("insertUser")){
+		out.print(dao.insertUser(id, nickName, pwd));
+		
 	}
 %>

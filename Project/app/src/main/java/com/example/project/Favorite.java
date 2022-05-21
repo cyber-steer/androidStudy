@@ -1,24 +1,34 @@
 package com.example.project;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project.manager.DbConect;
 import com.example.project.adapter.FavoriteAdapter;
+import com.example.project.manager.SessionManager;
 import com.example.project.model.RecipesDto;
 
 import java.util.ArrayList;
 
 public class Favorite extends AppCompatActivity {
+    Button btnLogout;
+    LinearLayout memberLayout, nonMemberLayout;
     ListView listView;
-    TextView toolbarName;
+    TextView toolbarName, userName;
     DrawerLayout drawerLayout;
+
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +72,50 @@ public class Favorite extends AppCompatActivity {
                 adapter.addItem(dto);
             }
         }
+
+        sessionManager = new SessionManager(getApplicationContext());
+
+        userName = findViewById(R.id.nickName);
+        memberLayout = findViewById(R.id.memberLayout);
+        nonMemberLayout = findViewById(R.id.nonMemberLayout);
+        if(sessionManager.getLogin()){
+            memberLayout.setVisibility(View.VISIBLE);
+            nonMemberLayout.setVisibility(View.INVISIBLE);
+            btnLogout = findViewById(R.id.btnLogout);
+            userName.setText(sessionManager.getNickName());
+        }else{
+            memberLayout.setVisibility(View.INVISIBLE);
+            nonMemberLayout.setVisibility(View.VISIBLE);
+        }
+
+        btnLogout = findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("로그아웃");
+                builder.setMessage("정말 로그아웃하시겠습니까?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        sessionManager.setLogin(false);
+                        sessionManager.setId("");
+                        sessionManager.setPwd("");
+                        sessionManager.setNickName("");
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
 
     }
     public void ClickMenu(View view){

@@ -37,10 +37,13 @@ public class DbConect extends AsyncTask<String, Void, String> {
                 sendMsg = "type="+strings[0]+"&name="+strings[2]+"&favorite="+strings[3];
             }
             else if(strings[0].equals("selectFavorite")){
-                sendMsg = "type="+strings[0]+strings[1];
+                sendMsg = "type="+strings[0];
             }
             else if(strings[0].equals("userCheck")){
                 sendMsg = "type="+strings[0]+"&id="+strings[2]+"&pwd="+strings[3];
+            }
+            else if(strings[0].equals("insertUser")){
+                sendMsg = "type="+strings[0]+"&id="+strings[2]+"&nickName="+strings[3]+"&pwd="+strings[4];
             }
             //--------------------------------------------------------------------------------------------------------
 

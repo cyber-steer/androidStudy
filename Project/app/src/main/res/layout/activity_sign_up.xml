@@ -28,7 +28,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/et_userName"
+                android:id="@+id/et_id"
                 android:hint="아이디"
                 android:padding="12dp"
                 android:layout_marginTop="48dp"
@@ -73,7 +73,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/bt_login"
+                android:id="@+id/bt_signUp"
                 android:text="login"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/white"/>

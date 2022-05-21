@@ -28,13 +28,9 @@ public class UserDao {
 		){
 			pstmt.setString(1, id);
 			pstmt.setString(2,pwd);
-			System.out.println(id);
 			try (ResultSet rs = pstmt.executeQuery();){
-				System.out.println(pwd);
 				if(rs.next()) {
-					System.out.println(pwd);
 					returns = rs.getString("nickname");
-					System.out.println(returns);					
 				}
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -44,7 +40,81 @@ public class UserDao {
 			returns = "error";
 			e.printStackTrace();
 		}
-		System.out.println("returns:"+returns);
+		return returns;
+	}
+	public String userCheckId(String id) {
+		String sql = "SELECT pwd, nickname from user where id=?;";
+		String returns="!false!";
+		try (
+			Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		){
+			pstmt.setString(1, id);
+			try (ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					returns = "";
+					returns += rs.getString("pwd")+",";
+					returns += rs.getString("nickname");
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
+	public String userCheckNickName(String nickName) {
+		String sql = "SELECT id, pwd from user where nickname=?;";
+		String returns="!false!";
+		try (
+			Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		){
+			pstmt.setString(1, nickName);
+			try (ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					returns = "";
+					returns += rs.getString("id")+",";
+					returns += rs.getString("pwd");
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
+
+	public String insertUser(String id, String nickName, String pwd) {
+		if(!userCheckId(id).equals("!false!")){
+			return "중복된 아이디입니다";
+		}
+		if(!userCheckNickName(nickName).equals("!false!")) {
+			System.out.println("test : "+userCheckNickName(nickName));
+			return "중복된 닉네임입니다";
+		}
+		String sql = "insert into user(id, nickname, pwd) values(?, ?, ?);";
+		String returns="fail";
+		try (
+			Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		){
+			pstmt.setString(1, id);
+			pstmt.setString(2,nickName);
+			pstmt.setString(3, pwd);
+			pstmt.executeUpdate();
+			returns = "true";
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
 		return returns;
 	}
 

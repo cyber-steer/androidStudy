@@ -57,10 +57,6 @@ public class SignIn extends AppCompatActivity {
                     DbConect conect = new DbConect();
                     String result="";
                     try{
-                        System.out.println("=====================");
-                        System.out.println(id);
-                        System.out.println(pwd);
-                        System.out.println("=====================");
                         result = conect.execute("userCheck","user",id,pwd).get();
                     }catch (Exception e){
                         e.printStackTrace();
@@ -68,7 +64,6 @@ public class SignIn extends AppCompatActivity {
 
                     System.out.println("result : "+result);
                     if(result.equals("!false!")){
-                        System.out.println("!fasle : "+result);
                         Toast.makeText(SignIn.this, "아이디나 비밀번호가 틀립니다", Toast.LENGTH_SHORT).show();
                     }
                     else{
@@ -76,15 +71,8 @@ public class SignIn extends AppCompatActivity {
                         sessionManager.setId(id);
                         sessionManager.setPwd(pwd);
                         sessionManager.setNickName(result);
-//                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-//                        finish();
-                        System.out.println("session=======================================================");
-                        System.out.println(result);
-                        System.out.println("로그인 : "+sessionManager.getLogin());
-                        System.out.println("아이디 : "+sessionManager.getId());
-                        System.out.println("비밀번호 : "+sessionManager.getPwd());
-                        System.out.println("닉네임 : "+sessionManager.getNickName());
-                        System.out.println("session=======================================================");
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        finish();
 
                     }
                     
