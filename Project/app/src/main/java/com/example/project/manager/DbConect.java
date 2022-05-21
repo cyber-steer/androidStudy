@@ -36,9 +36,6 @@ public class DbConect extends AsyncTask<String, Void, String> {
             if(strings[0].equals("selectBase")){
                 sendMsg = "type="+strings[0]+"&table="+strings[1]+"&base="+strings[2];
             }
-            else if(strings[0].equals("updateFavorite")){
-                sendMsg = "type="+strings[0]+"&name="+strings[2]+"&favorite="+strings[3];
-            }
             else if(strings[0].equals("selectFavorite")){
                 sendMsg = "type="+strings[0]+"&userid="+strings[2];
             }
@@ -49,6 +46,12 @@ public class DbConect extends AsyncTask<String, Void, String> {
                 sendMsg = "type="+strings[0]+"&id="+strings[2]+"&nickName="+strings[3]+"&pwd="+strings[4];
             }
             else if(strings[0].equals("favoriteCheck")){
+                sendMsg = "type="+strings[0]+"&userid="+strings[2]+"&recipesname="+strings[3];
+            }
+            else if(strings[0].equals("deleteFavorite")){
+                sendMsg = "type="+strings[0]+"&userid="+strings[2]+"&recipesname="+strings[3];
+            }
+            else if(strings[0].equals("insertFavorite")){
                 sendMsg = "type="+strings[0]+"&userid="+strings[2]+"&recipesname="+strings[3];
             }
             //--------------------------------------------------------------------------------------------------------

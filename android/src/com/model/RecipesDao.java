@@ -51,30 +51,5 @@ public class RecipesDao {
 		}
 		return returns;
 	}
-	public String updateFavorite(String name, String bool) {
-		String sql = "update recipes set favorite=? where recipesname=?;";
-		String returns="false";
-		System.out.println("update");
-		try (
-			Connection con = getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql);
-		){
-			boolean favorite = bool.equals("true") ? true:false;
-			System.out.println("favorite : "+favorite);
-			System.out.println("name : "+name);
-			pstmt.setBoolean(1, favorite);
-			pstmt.setString(2, name);
-			int result = pstmt.executeUpdate();
-			System.out.println("result : "+result);
-			if(result>0) {
-				returns="true";
-			}
-			
-		} catch (Exception e) {
-			returns = "error";
-			e.printStackTrace();
-		}
-		return returns;
-	}
 
 }

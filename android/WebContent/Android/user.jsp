@@ -9,6 +9,7 @@
 	String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");
 	String nickName = request.getParameter("nickName");
+	
 	UserDao dao = new UserDao();
 	
 	if(type.equals("userCheck")){

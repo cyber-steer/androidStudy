@@ -15,5 +15,11 @@
 	else if(type.equals("favoriteCheck")){
 		out.print(dao.favoriteCheck(id, name));
 	}
+	else if(type.equals("insertFavorite")){
+		out.print(dao.insertFavorite(id, name));
+	}
+	else if(type.equals("deleteFavorite")){
+		out.print(dao.deleteFavorite(id, name));
+	}
 
 %>

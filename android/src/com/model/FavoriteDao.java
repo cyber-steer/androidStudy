@@ -80,4 +80,40 @@ public class FavoriteDao {
 		}
 		return returns;
 	}
+	public String insertFavorite(String id, String name) {
+		String sql = "INSERT INTO favorite(userid, recipesname) VALUES(?, ?);";
+		String returns="false";
+		try (
+			Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		){
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			pstmt.executeUpdate();
+			returns="true";
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
+	public String deleteFavorite(String id, String name) {
+		String sql ="DELETE FROM favorite WHERE userid=? AND recipesname=?;";
+		String returns="false";
+		try (
+			Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		){
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			pstmt.executeUpdate();
+			returns="true";
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
 }

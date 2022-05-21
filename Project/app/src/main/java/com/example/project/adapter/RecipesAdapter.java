@@ -80,6 +80,19 @@ public class RecipesAdapter extends BaseAdapter {
                 DbConect conect = new DbConect();
                 String result="";
                 try{
+                    result = conect.execute("favoriteCheck","favorite",userid,dto.getName()).get();
+                    if(result.equals("true")){
+                        conect = null;
+                        conect = new DbConect();
+                        result = conect.execute("deleteFavorite","favorite",userid,dto.getName()).get();
+                        favorite.setImageDrawable(unstar);
+                    }
+                    else{
+                        conect = null;
+                        conect = new DbConect();
+                        result = conect.execute("insertFavorite","favorite",userid,dto.getName()).get();
+                        favorite.setImageDrawable(star);
+                    }
                 } catch (Exception e){
                     e.printStackTrace();
                 }
