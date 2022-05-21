@@ -3,16 +3,14 @@ package com.model;
 public class RecipesDto {
 	String name;
 	double proof;
-	boolean favorite;
 	
 	public RecipesDto() {
 		
 	}
-	public RecipesDto(String name, double proof, boolean favorite) {
+	public RecipesDto(String name, double proof) {
 		super();
 		this.name = name;
 		this.proof = proof;
-		this.favorite = favorite;
 	}
 
 	public String getName() {
@@ -31,13 +29,6 @@ public class RecipesDto {
 		this.proof = proof;
 	}
 
-	public boolean isFavorite() {
-		return favorite;
-	}
-
-	public void setFavorite(boolean favorite) {
-		this.favorite = favorite;
-	}
 	
 	
 	

@@ -1,8 +1,10 @@
 package com.example.project;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project.manager.DbConect;
+import com.example.project.manager.SessionManager;
 
 import java.util.regex.Pattern;
 
@@ -20,6 +23,8 @@ public class SignUp extends AppCompatActivity {
     EditText et_id, et_nickName, et_pwd, et_pwdCheck;
     TextView toolbarName;
     DrawerLayout drawerLayout;
+
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,7 @@ public class SignUp extends AppCompatActivity {
         toolbarName = findViewById(R.id.toolbarName);
         toolbarName.setText("회원가입");
 
+        sessionManager = new SessionManager(getApplicationContext());
         btnSignUp = findViewById(R.id.bt_signUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +132,29 @@ public class SignUp extends AppCompatActivity {
         MainActivity.redirectActivity(this,Recipes.class);
     }
     public void ClickFavorite(View view){
-        MainActivity.redirectActivity(this,Favorite.class);
+        if(sessionManager.getLogin()){
+            MainActivity.redirectActivity(this,Favorite.class);
+        }
+        else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setTitle("로그인");
+            builder.setMessage("즐겨찾기는 로그인을 해야 이용가능합니다 로그인 하겠습니까?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivity(new Intent(getApplicationContext(), SignIn.class));
+                    finish();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
 
     public void ClickHome(View view){

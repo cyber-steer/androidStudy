@@ -20,7 +20,7 @@ public class UserDao {
 	}
 	
 	public String userCheck(String id, String pwd) {
-		String sql = "SELECT nickname from user where id=? and pwd=?;";
+		String sql = "SELECT nickname from user where userid=? and pwd=?;";
 		String returns="!false!";
 		try (
 			Connection con = getConnection();
@@ -43,7 +43,7 @@ public class UserDao {
 		return returns;
 	}
 	public String userCheckId(String id) {
-		String sql = "SELECT pwd, nickname from user where id=?;";
+		String sql = "SELECT pwd, nickname from user where userid=?;";
 		String returns="!false!";
 		try (
 			Connection con = getConnection();
@@ -67,7 +67,7 @@ public class UserDao {
 		return returns;
 	}
 	public String userCheckNickName(String nickName) {
-		String sql = "SELECT id, pwd from user where nickname=?;";
+		String sql = "SELECT userid, pwd from user where nickname=?;";
 		String returns="!false!";
 		try (
 			Connection con = getConnection();
@@ -96,10 +96,9 @@ public class UserDao {
 			return "중복된 아이디입니다";
 		}
 		if(!userCheckNickName(nickName).equals("!false!")) {
-			System.out.println("test : "+userCheckNickName(nickName));
 			return "중복된 닉네임입니다";
 		}
-		String sql = "insert into user(id, nickname, pwd) values(?, ?, ?);";
+		String sql = "insert into user(userid, nickname, pwd) values(?, ?, ?);";
 		String returns="fail";
 		try (
 			Connection con = getConnection();

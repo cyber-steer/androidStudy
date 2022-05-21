@@ -107,7 +107,29 @@ public class MainActivity extends AppCompatActivity {
         redirectActivity(this, Board.class);
     }
     public void ClickFavorite(View view){
-        redirectActivity(this, Favorite.class);
+        if(sessionManager.getLogin()){
+            MainActivity.redirectActivity(this,Favorite.class);
+        }
+        else{
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(view.getContext());
+            builder.setTitle("로그인");
+            builder.setMessage("즐겨찾기는 로그인을 해야 이용가능합니다 로그인 하겠습니까?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivity(new Intent(getApplicationContext(), SignIn.class));
+                    finish();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
     public void ClickSignIn(View view){
         redirectActivity(this,SignIn.class);

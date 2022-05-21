@@ -43,11 +43,26 @@ public class Favorite extends AppCompatActivity {
         FavoriteAdapter adapter = new FavoriteAdapter();
         listView.setAdapter(adapter);
 
+        sessionManager = new SessionManager(getApplicationContext());
+        userName = findViewById(R.id.nickName);
+        memberLayout = findViewById(R.id.memberLayout);
+        nonMemberLayout = findViewById(R.id.nonMemberLayout);
+        if(sessionManager.getLogin()){
+            memberLayout.setVisibility(View.VISIBLE);
+            nonMemberLayout.setVisibility(View.INVISIBLE);
+            btnLogout = findViewById(R.id.btnLogout);
+            userName.setText(sessionManager.getNickName());
+        }else{
+            memberLayout.setVisibility(View.INVISIBLE);
+            nonMemberLayout.setVisibility(View.VISIBLE);
+        }
+
         ArrayList<RecipesDto> dtos = new ArrayList<>();
         String result="";
         DbConect conect = new DbConect();
         try {
-            result = conect.execute("selectFavorite","recipes").get();
+            String id = sessionManager.getId();
+            result = conect.execute("selectFavorite","favorite",id).get();
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -63,9 +78,6 @@ public class Favorite extends AppCompatActivity {
                 RecipesDto dto = new RecipesDto();
                 dto.setName(results[i++]);
                 dto.setProof(results[i++]);
-                String bool = results[i++];
-                boolean favorite = bool.equals("true") ? true:false;
-                dto.setFavorite(favorite);
                 dtos.add(dto);
             }
             for(RecipesDto dto : dtos){
@@ -73,20 +85,6 @@ public class Favorite extends AppCompatActivity {
             }
         }
 
-        sessionManager = new SessionManager(getApplicationContext());
-
-        userName = findViewById(R.id.nickName);
-        memberLayout = findViewById(R.id.memberLayout);
-        nonMemberLayout = findViewById(R.id.nonMemberLayout);
-        if(sessionManager.getLogin()){
-            memberLayout.setVisibility(View.VISIBLE);
-            nonMemberLayout.setVisibility(View.INVISIBLE);
-            btnLogout = findViewById(R.id.btnLogout);
-            userName.setText(sessionManager.getNickName());
-        }else{
-            memberLayout.setVisibility(View.INVISIBLE);
-            nonMemberLayout.setVisibility(View.VISIBLE);
-        }
 
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {

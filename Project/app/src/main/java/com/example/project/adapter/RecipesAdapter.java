@@ -51,12 +51,6 @@ public class RecipesAdapter extends BaseAdapter {
         proof.setText(dto.getProof()+"%");
         Drawable star =  ContextCompat.getDrawable(viewGroup.getContext(),R.drawable.ic_star);
         Drawable unstar =  ContextCompat.getDrawable(viewGroup.getContext(),R.drawable.ic_unstar);
-        if(dto.isFavorite()){
-            favorite.setImageDrawable(star);
-        }
-        else{
-            favorite.setImageDrawable(unstar);
-        }
 
 
         favorite.setOnClickListener(new View.OnClickListener() {
@@ -65,17 +59,6 @@ public class RecipesAdapter extends BaseAdapter {
                 DbConect conect = new DbConect();
                 String result="";
                 try{
-                    if(dto.isFavorite()){
-                        dto.setFavorite(false);
-                        favorite.setImageDrawable(unstar);
-                        result = conect.execute("updateFavorite","recipes",dto.getName(),"false").get();
-
-                    }
-                    else{
-                        dto.setFavorite(true);
-                        favorite.setImageDrawable(star);
-                        result = conect.execute("updateFavorite","recipes",dto.getName(),"true").get();
-                    }
                 } catch (Exception e){
                     e.printStackTrace();
                 }

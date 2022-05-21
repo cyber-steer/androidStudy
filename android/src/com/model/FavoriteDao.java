@@ -1,8 +1,6 @@
 package com.model;
 
-
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -11,8 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class RecipesDao {
-	
+public class FavoriteDao {
+
 	private Connection getConnection()  throws Exception {
 		Context initCtx = new InitialContext();
 		Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -21,9 +19,12 @@ public class RecipesDao {
 		return con;
 	}
 	
-	public String selectBase(String base) {
+	public String selecteFavorite(String id) {
 		ArrayList<RecipesDto> dtos = new ArrayList<RecipesDto>();
-		String sql = "SELECT recipesname, proof FROM recipes where base='"+base+"';";
+		String sql = "SELECT recipesname, proof "
+				+ "FROM recipes "
+				+ "WHERE recipesname IN ("
+				+ "SELECT recipesname FROM favorite WHERE userid='"+id+"');";
 		String returns="fail";
 		try (
 			Connection con = getConnection();
@@ -31,6 +32,7 @@ public class RecipesDao {
 			ResultSet rs = stmt.executeQuery(sql);
 		){
 			while(rs.next()) {
+				System.out.println("true");
 				RecipesDto dto = new RecipesDto();
 				dto.setName(rs.getString("recipesname"));
 				dto.setProof(rs.getDouble("proof"));
@@ -51,30 +53,4 @@ public class RecipesDao {
 		}
 		return returns;
 	}
-	public String updateFavorite(String name, String bool) {
-		String sql = "update recipes set favorite=? where recipesname=?;";
-		String returns="false";
-		System.out.println("update");
-		try (
-			Connection con = getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql);
-		){
-			boolean favorite = bool.equals("true") ? true:false;
-			System.out.println("favorite : "+favorite);
-			System.out.println("name : "+name);
-			pstmt.setBoolean(1, favorite);
-			pstmt.setString(2, name);
-			int result = pstmt.executeUpdate();
-			System.out.println("result : "+result);
-			if(result>0) {
-				returns="true";
-			}
-			
-		} catch (Exception e) {
-			returns = "error";
-			e.printStackTrace();
-		}
-		return returns;
-	}
-
 }

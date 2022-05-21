@@ -27,6 +27,9 @@ public class DbConect extends AsyncTask<String, Void, String> {
             else if(strings[1].equals("user")){
                 url = new URL("http://10.0.2.2:8080/android/Android/user.jsp");
             }
+            else if(strings[1].equals("favorite")){
+                url = new URL("http://10.0.2.2:8080/android/Android/favorite.jsp");
+            }
 
             //--------------------------------------------------------------------------------------------------------
 
@@ -37,7 +40,7 @@ public class DbConect extends AsyncTask<String, Void, String> {
                 sendMsg = "type="+strings[0]+"&name="+strings[2]+"&favorite="+strings[3];
             }
             else if(strings[0].equals("selectFavorite")){
-                sendMsg = "type="+strings[0];
+                sendMsg = "type="+strings[0]+"&userid="+strings[2];
             }
             else if(strings[0].equals("userCheck")){
                 sendMsg = "type="+strings[0]+"&id="+strings[2]+"&pwd="+strings[3];

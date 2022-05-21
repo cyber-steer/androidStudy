@@ -1,8 +1,10 @@
 package com.example.project;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -92,7 +94,29 @@ public class SignIn extends AppCompatActivity {
         MainActivity.redirectActivity(this,Recipes.class);
     }
     public void ClickFavorite(View view){
-        MainActivity.redirectActivity(this,Favorite.class);
+        if(sessionManager.getLogin()){
+            MainActivity.redirectActivity(this,Favorite.class);
+        }
+        else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setTitle("로그인");
+            builder.setMessage("즐겨찾기는 로그인을 해야 이용가능합니다 로그인 하겠습니까?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivity(new Intent(getApplicationContext(), SignIn.class));
+                    finish();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
 
     public void ClickHome(View view){

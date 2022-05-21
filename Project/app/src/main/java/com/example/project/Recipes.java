@@ -124,7 +124,29 @@ public class Recipes extends AppCompatActivity {
         recreate();
     }
     public void ClickFavorite(View view){
-        MainActivity.redirectActivity(this,Favorite.class);
+        if(sessionManager.getLogin()){
+            MainActivity.redirectActivity(this,Favorite.class);
+        }
+        else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+            builder.setTitle("로그인");
+            builder.setMessage("즐겨찾기는 로그인을 해야 이용가능합니다 로그인 하겠습니까?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivity(new Intent(getApplicationContext(), SignIn.class));
+                    finish();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
 
     public void ClickSignIn(View view){
@@ -182,9 +204,6 @@ public class Recipes extends AppCompatActivity {
                 RecipesDto dto = new RecipesDto();
                 dto.setName(results[i++]);
                 dto.setProof(results[i++]);
-                String bool = results[i++];
-                boolean favorite = bool.equals("true") ? true:false;
-                dto.setFavorite(favorite);
                 dtos.add(dto);
             }
             for(RecipesDto dto : dtos){
