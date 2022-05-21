@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.project.adapter.DbConect;
+import com.example.project.manager.DbConect;
 import com.example.project.adapter.FavoriteAdapter;
 import com.example.project.model.RecipesDto;
 
@@ -78,6 +78,12 @@ public class Favorite extends AppCompatActivity {
         MainActivity.redirectActivity(this,Favorite.class);
     }
 
+    public void ClickSignIn(View view){
+        MainActivity.redirectActivity(this,SignIn.class);
+    }
+    public void ClickSignUp(View view){
+        MainActivity.redirectActivity(this,SignUp.class);
+    }
     public void ClickHome(View view){
         MainActivity.redirectActivity(this, MainActivity.class);
     }

@@ -1,9 +1,7 @@
 package com.example.project.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,7 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.example.project.R;
+import com.example.project.manager.DbConect;
 import com.example.project.model.RecipesDto;
 
 import java.util.ArrayList;

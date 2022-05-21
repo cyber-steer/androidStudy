@@ -4,13 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    
-    <ImageView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="16dp"
-        android:onClick="ClickLogo"
-        android:src="@drawable/ac_logo"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="16dp"
+            android:onClick="ClickLogo"
+            android:src="@drawable/ac_logo"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="로그인"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:textStyle="bold"
+                    android:onClick="ClickSignIn"
+                    android:background="@drawable/radius"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="회원가입"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:textStyle="bold"
+                    android:onClick="ClickSignUp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="닉네임"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="30dp"
+                    android:layout_marginTop="20dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="로그아웃"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:textStyle="bold"
+                    android:onClick="ClickSignUp"/>
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"

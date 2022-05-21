@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.example.project.R;
+import com.example.project.manager.DbConect;
 import com.example.project.model.RecipesDto;
 
 import java.util.ArrayList;

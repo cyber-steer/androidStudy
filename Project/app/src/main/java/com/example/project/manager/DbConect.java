@@ -1,4 +1,4 @@
-package com.example.project.adapter;
+package com.example.project.manager;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -24,6 +24,8 @@ public class DbConect extends AsyncTask<String, Void, String> {
             con.setRequestMethod("POST");
             OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream(),"UTF-8");
 
+            //--------------------------------------------------------------------------------------------------------
+
             if(strings[0].equals("selectBase")){
                 if(strings[1].equals("recipes")){
                     sendMsg = "type="+strings[0]+"&table="+strings[1]+"&base="+strings[2];
@@ -35,6 +37,8 @@ public class DbConect extends AsyncTask<String, Void, String> {
             else if(strings[0].equals("selectFavorite")){
                 sendMsg = "type="+strings[0]+"&table="+strings[1];
             }
+            
+            //--------------------------------------------------------------------------------------------------------
             osw.write(sendMsg);
             osw.flush();
             if(con.getResponseCode() == con.HTTP_OK){

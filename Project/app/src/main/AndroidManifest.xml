@@ -14,8 +14,17 @@
         android:theme="@style/Theme.Project"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SignUp"
+            android:exported="false"
+            android:theme="@style/Theme.Project.NoActionBar" />
+        <activity
+            android:name=".SignIn"
+            android:exported="false"
+            android:theme="@style/Theme.Project.NoActionBar"  />
+        <activity
             android:name=".Favorite"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Project.NoActionBar"     />
         <activity
             android:name=".Info"
             android:exported="false"

@@ -57,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
     public void ClickFavorite(View view){
         redirectActivity(this, Favorite.class);
     }
+    public void ClickSignIn(View view){
+        redirectActivity(this,SignIn.class);
+    }
+    public void ClickSignUp(View view){
+        redirectActivity(this,SignUp.class);
+    }
 
     public void ClickInfo(View view){
         redirectActivity(this, Info.class);

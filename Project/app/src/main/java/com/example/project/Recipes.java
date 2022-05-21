@@ -3,7 +3,6 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,7 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.project.adapter.DbConect;
+import com.example.project.manager.DbConect;
 import com.example.project.adapter.RecipesAdapter;
 import com.example.project.model.RecipesDto;
 import com.google.android.material.tabs.TabLayout;
@@ -75,6 +74,12 @@ public class Recipes extends AppCompatActivity {
         MainActivity.redirectActivity(this,Favorite.class);
     }
 
+    public void ClickSignIn(View view){
+        MainActivity.redirectActivity(this,SignIn.class);
+    }
+    public void ClickSignUp(View view){
+        MainActivity.redirectActivity(this,SignUp.class);
+    }
     public void ClickHome(View view){
         MainActivity.redirectActivity(this, MainActivity.class);
     }

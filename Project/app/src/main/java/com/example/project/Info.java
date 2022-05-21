@@ -34,6 +34,12 @@ public class Info extends AppCompatActivity {
     public void ClickFavorite(View view){
         MainActivity.redirectActivity(this,Favorite.class);
     }
+    public void ClickSignIn(View view){
+        MainActivity.redirectActivity(this,SignIn.class);
+    }
+    public void ClickSignUp(View view){
+        MainActivity.redirectActivity(this,SignUp.class);
+    }
 
     public void ClickHome(View view){
         MainActivity.redirectActivity(this, MainActivity.class);
