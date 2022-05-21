@@ -3,18 +3,24 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.project.manager.DbConect;
+import com.example.project.manager.SessionManager;
 
 public class SignIn extends AppCompatActivity {
     Button btnLogin;
     EditText et_id, et_pwd;
     TextView toolbarName;
     DrawerLayout drawerLayout;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +29,9 @@ public class SignIn extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
-        toolbarName.setText("게시판");
+        toolbarName.setText("로그인");
+
+        sessionManager = new SessionManager(getApplicationContext());
 
         btnLogin = findViewById(R.id.bt_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -33,12 +41,54 @@ public class SignIn extends AppCompatActivity {
                 et_pwd = findViewById(R.id.et_pwd);
 
                 String id = et_id.getText().toString();
-                String pwd = et_id.getText().toString();
+                String pwd = et_pwd.getText().toString();
 
                 id = id.trim();
                 pwd = pwd.trim();
+                if(id.equals("") || pwd.equals("")){
+                    if(id.equals("")){
+                        et_id.setError("아이디를 입력해주세요");
+                    }
+                    if(pwd.equals("")) {
+                        et_pwd.setError("비밀번호를 입력해주세요");
+                    }
+                }
+                else{
+                    DbConect conect = new DbConect();
+                    String result="";
+                    try{
+                        System.out.println("=====================");
+                        System.out.println(id);
+                        System.out.println(pwd);
+                        System.out.println("=====================");
+                        result = conect.execute("userCheck","user",id,pwd).get();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
 
-                if(id)
+                    System.out.println("result : "+result);
+                    if(result.equals("!false!")){
+                        System.out.println("!fasle : "+result);
+                        Toast.makeText(SignIn.this, "아이디나 비밀번호가 틀립니다", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        sessionManager.setLogin(true);
+                        sessionManager.setId(id);
+                        sessionManager.setPwd(pwd);
+                        sessionManager.setNickName(result);
+//                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                        finish();
+                        System.out.println("session=======================================================");
+                        System.out.println(result);
+                        System.out.println("로그인 : "+sessionManager.getLogin());
+                        System.out.println("아이디 : "+sessionManager.getId());
+                        System.out.println("비밀번호 : "+sessionManager.getPwd());
+                        System.out.println("닉네임 : "+sessionManager.getNickName());
+                        System.out.println("session=======================================================");
+
+                    }
+                    
+                }
 
             }
         });

@@ -22,7 +22,7 @@
     <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
     
-    <Resource name = "jdbc/recipes"
+    <Resource name = "jdbc/androiddb"
     auth = "container"
     type="javax.sql.DataSource"
     driverClassName="org.mariadb.jdbc.Driver"

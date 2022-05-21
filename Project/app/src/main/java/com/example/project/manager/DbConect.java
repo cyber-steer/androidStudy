@@ -18,27 +18,37 @@ public class DbConect extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try {
             String str;
-            URL url = new URL("http://10.0.2.2:8080/android/Android/androidDB.jsp");
+            URL url = null;
+
+            //--------------------------------------------------------------------------------------------------------
+            if(strings[1].equals("recipes")){
+                url = new URL("http://10.0.2.2:8080/android/Android/recipes.jsp");
+            }
+            else if(strings[1].equals("user")){
+                url = new URL("http://10.0.2.2:8080/android/Android/user.jsp");
+            }
+
+            //--------------------------------------------------------------------------------------------------------
+
+            if(strings[0].equals("selectBase")){
+                sendMsg = "type="+strings[0]+"&table="+strings[1]+"&base="+strings[2];
+            }
+            else if(strings[0].equals("updateFavorite")){
+                sendMsg = "type="+strings[0]+"&name="+strings[2]+"&favorite="+strings[3];
+            }
+            else if(strings[0].equals("selectFavorite")){
+                sendMsg = "type="+strings[0]+strings[1];
+            }
+            else if(strings[0].equals("userCheck")){
+                sendMsg = "type="+strings[0]+"&id="+strings[2]+"&pwd="+strings[3];
+            }
+            //--------------------------------------------------------------------------------------------------------
+
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
             con.setRequestMethod("POST");
             OutputStreamWriter osw = new OutputStreamWriter(con.getOutputStream(),"UTF-8");
 
-            //--------------------------------------------------------------------------------------------------------
-
-            if(strings[0].equals("selectBase")){
-                if(strings[1].equals("recipes")){
-                    sendMsg = "type="+strings[0]+"&table="+strings[1]+"&base="+strings[2];
-                }
-            }
-            else if(strings[0].equals("updateFavorite")){
-                sendMsg = "type="+strings[0]+"&table="+strings[1]+"&name="+strings[2]+"&favorite="+strings[3];
-            }
-            else if(strings[0].equals("selectFavorite")){
-                sendMsg = "type="+strings[0]+"&table="+strings[1];
-            }
-            
-            //--------------------------------------------------------------------------------------------------------
             osw.write(sendMsg);
             osw.flush();
             if(con.getResponseCode() == con.HTTP_OK){

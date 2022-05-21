@@ -18,7 +18,7 @@ public class SignUp extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
-        toolbarName.setText("게시판");
+        toolbarName.setText("회원가입");
     }
     public void ClickMenu(View view){
         MainActivity.openDrawer(drawerLayout);

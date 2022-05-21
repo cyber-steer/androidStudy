@@ -7,6 +7,7 @@ public class SessionManager {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+
     public SessionManager(Context context){
         sharedPreferences = context.getSharedPreferences("AppKey",0);
         editor = sharedPreferences.edit();
@@ -35,10 +36,10 @@ public class SessionManager {
         return sharedPreferences.getString("KEY_PWD","");
     }
     public void setNickName(String nickName){
-        editor.putString("KEY_NiCKNAME",nickName);
+        editor.putString("KEY_NICKNAME",nickName);
         editor.commit();
     }
     public String getNickName(){
-        return sharedPreferences.getString("KEY_NickName","");
+        return sharedPreferences.getString("KEY_NICKNAME","");
     }
 }

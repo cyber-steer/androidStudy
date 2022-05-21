@@ -16,7 +16,7 @@ public class RecipesDao {
 	private Connection getConnection()  throws Exception {
 		Context initCtx = new InitialContext();
 		Context envCtx = (Context) initCtx.lookup("java:comp/env");
-		DataSource ds =(DataSource) envCtx.lookup("jdbc/recipes");
+		DataSource ds =(DataSource) envCtx.lookup("jdbc/androiddb");
 		Connection con = ds.getConnection();
 		return con;
 	}
