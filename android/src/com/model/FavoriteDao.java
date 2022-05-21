@@ -1,6 +1,7 @@
 package com.model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -45,6 +46,32 @@ public class FavoriteDao {
 					returns += dto.getName() +",";
 					returns += dto.getProof() +",";
 				}
+			}
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
+
+	public String favoriteCheck(String id, String name) {
+		String sql = "SELECT recipesname FROM favorite WHERE userid=? AND recipesname=?;";
+		String returns="false";
+		try (
+			Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		){
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					returns = "true";
+				}
+				
+			}catch (Exception e) {
+				returns = "error";
+				e.printStackTrace();
 			}
 			
 		} catch (Exception e) {

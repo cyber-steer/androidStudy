@@ -14,12 +14,14 @@ import androidx.core.content.ContextCompat;
 
 import com.example.project.R;
 import com.example.project.manager.DbConect;
+import com.example.project.manager.SessionManager;
 import com.example.project.model.RecipesDto;
 
 import java.util.ArrayList;
 
 public class FavoriteAdapter extends BaseAdapter {
     ArrayList<RecipesDto> dtos = new ArrayList<>();
+    SessionManager sessionManager;
     @Override
     public int getCount() {
         return dtos.size();
@@ -52,11 +54,28 @@ public class FavoriteAdapter extends BaseAdapter {
         Drawable star =  ContextCompat.getDrawable(viewGroup.getContext(),R.drawable.ic_star);
         Drawable unstar =  ContextCompat.getDrawable(viewGroup.getContext(),R.drawable.ic_unstar);
 
+        DbConect conect = new DbConect();
+        String result="";
 
+        sessionManager = new SessionManager(viewGroup.getContext());
+        String userid = sessionManager.getId();
+        try{
+            result = conect.execute("favoriteCheck","favorite",userid,dto.getName()).get();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(result.equals("true")){
+            favorite.setImageDrawable(star);
+        }
+        else if(result.equals("false")){
+            favorite.setImageDrawable(unstar);
+        }
+        else{
+            favorite.setImageDrawable(null);
+        }
         favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DbConect conect = new DbConect();
                 String result="";
                 try{
                 } catch (Exception e){

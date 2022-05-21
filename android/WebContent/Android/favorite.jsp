@@ -5,11 +5,15 @@
 	request.setCharacterEncoding("UTF-8");
 	String type = request.getParameter("type");
 	String id = request.getParameter("userid");
+	String name = request.getParameter("recipesname");
 
 	FavoriteDao dao = new FavoriteDao();
 	
 	if(type.equals("selectFavorite")){
 		out.print(dao.selecteFavorite(id));
+	}
+	else if(type.equals("favoriteCheck")){
+		out.print(dao.favoriteCheck(id, name));
 	}
 
 %>

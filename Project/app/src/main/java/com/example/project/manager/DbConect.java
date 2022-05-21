@@ -48,6 +48,9 @@ public class DbConect extends AsyncTask<String, Void, String> {
             else if(strings[0].equals("insertUser")){
                 sendMsg = "type="+strings[0]+"&id="+strings[2]+"&nickName="+strings[3]+"&pwd="+strings[4];
             }
+            else if(strings[0].equals("favoriteCheck")){
+                sendMsg = "type="+strings[0]+"&userid="+strings[2]+"&recipesname="+strings[3];
+            }
             //--------------------------------------------------------------------------------------------------------
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
