@@ -1,6 +1,7 @@
 package com.example.project.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.core.content.ContextCompat;
 
 import com.example.project.R;
+import com.example.project.RecipeContent;
 import com.example.project.manager.DbConect;
 import com.example.project.manager.SessionManager;
 import com.example.project.model.RecipesDto;
@@ -102,6 +104,14 @@ public class RecipesAdapter extends BaseAdapter {
             }
         });
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(viewGroup.getContext(), RecipeContent.class);
+                intent.putExtra("name",dto.getName());
+                viewGroup.getContext().startActivity(intent);
+            }
+        });
         return view;
     }
     public void addItem(RecipesDto dto){

@@ -14,17 +14,23 @@
         android:theme="@style/Theme.Project"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".RecipesInsert"
+            android:exported="false" />
+        <activity
+            android:name=".RecipeContent"
+            android:exported="false" />
+        <activity
             android:name=".SignUp"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />
         <activity
             android:name=".SignIn"
             android:exported="false"
-            android:theme="@style/Theme.Project.NoActionBar"  />
+            android:theme="@style/Theme.Project.NoActionBar" />
         <activity
             android:name=".Favorite"
             android:exported="false"
-            android:theme="@style/Theme.Project.NoActionBar"     />
+            android:theme="@style/Theme.Project.NoActionBar" />
         <activity
             android:name=".Info"
             android:exported="false"

@@ -11,18 +11,22 @@
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/drawable/ic_board.xml" value="0.1935" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/drawable/ic_launcher_background.xml" value="0.223" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/drawable/ic_list.xml" value="0.1935" />
+        <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/drawable/ic_more.xml" value="0.1985" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/drawable/ic_person.xml" value="0.1355" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/drawable/ic_star.xml" value="0.136" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/drawable/ic_unstar.xml" value="0.136" />
+        <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/drawable/line.xml" value="0.1985" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/drawable/radius.xml" value="0.11200000000000002" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_Board.xml" value="0.264" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_about_us.xml" value="0.11878952122854562" />
-        <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_board.xml" value="0.264" />
+        <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_board.xml" value="0.21888412017167383" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_dashboard.xml" value="0.264" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_favorite.xml" value="0.22907366071428573" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_info.xml" value="0.11878952122854562" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_recipe_content.xml" value="0.264" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_recipes.xml" value="0.2" />
+        <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_recipes_insert.xml" value="0.17346014492753623" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_sign_in.xml" value="0.17346014492753623" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/activity_sign_up.xml" value="0.17346014492753623" />
         <entry key="..\:/Users/admin/Polder/work/code/android/Project/app/src/main/res/layout/layout.xml" value="0.264" />
