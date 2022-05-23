@@ -30,7 +30,7 @@ public class RecipesInsert extends AppCompatActivity {
     Button btnLogout, btnSave, btnMeterialAdd, btnMeterialRemove,btnFormalitiesRemove,btnFormalitiesAdd;
     LinearLayout memberLayout, nonMemberLayout;
     TextView toolbarName, userName;
-    EditText etBase, etBaseVoluem, etFormalities, etRecipesName, etRecipesContent;
+    EditText etBase, etBaseVoluem, etFormalities, etRecipesName,etRecipesProof, etRecipesContent;
     DrawerLayout drawerLayout;
 
     SessionManager sessionManager;
@@ -52,6 +52,7 @@ public class RecipesInsert extends AppCompatActivity {
         etBase = findViewById(R.id.etBase);
         etBaseVoluem = findViewById(R.id.etBaseVoluem);
         etFormalities = findViewById(R.id.etFormalities);
+        etRecipesProof = findViewById(R.id.etRecipesProof);
 
         meterialId = new ArrayList<>();
         formalitiesId = new ArrayList<>();
@@ -128,9 +129,10 @@ public class RecipesInsert extends AppCompatActivity {
                 String formalitiesStr=etFormalities.getText().toString().trim();
                 String recipesName = etRecipesName.getText().toString().trim();
                 String recipesContent = etRecipesContent.getText().toString().trim();
+                String proof = etRecipesProof.getText().toString().trim();
 
                 String check="true";
-                if(meterialStr.equals("")||voluemStr.equals("")||formalitiesStr.equals("")||recipesName.equals("")||recipesContent.equals("")){
+                if(meterialStr.equals("")||voluemStr.equals("")||formalitiesStr.equals("")||recipesName.equals("")||recipesContent.equals("")||proof.equals("")){
                     check="false";
                 }
 
@@ -165,7 +167,26 @@ public class RecipesInsert extends AppCompatActivity {
                     Toast.makeText(RecipesInsert.this, "비어있는 입력이 있습니다", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    DbConect dbConect = new DbConect();
+                    String msg = recipesName+","+proof+","+recipesContent+","+meterialStr+","+voluemStr+","+formalitiesStr;
+
+                    DbConect conect = new DbConect();
+                    String result="";
+                    try{
+                        result = conect.execute("insertRecipes","recipecontent",msg).get();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    if(result.equals("faill")){
+                        Toast.makeText(RecipesInsert.this, "저장하지 못했습니다", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(result.equals("error")){
+                        Toast.makeText(RecipesInsert.this, "에러발생", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        startActivity(null);
+                    }
+
 
                 }
                 System.out.println("1st : "+meterialStr);

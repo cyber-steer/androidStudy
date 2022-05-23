@@ -39,19 +39,21 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="이름"
-                    android:textSize="16dp"
-                    android:textStyle="bold"/>
-
                 <EditText
                     android:id="@+id/etRecipesName"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_outline_rectangle"
                     android:hint="칵테일 이름"
+                    android:textSize="16dp"
+                    android:padding="10dp"
+                    android:layout_marginRight="10dp"/>
+                <EditText
+                    android:id="@+id/etRecipesProof"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_outline_rectangle"
+                    android:hint="도수"
                     android:textSize="16dp"
                     android:padding="10dp"/>
             </LinearLayout>

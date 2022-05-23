@@ -30,6 +30,9 @@ public class DbConect extends AsyncTask<String, Void, String> {
             else if(strings[1].equals("favorite")){
                 url = new URL("http://10.0.2.2:8080/android/Android/favorite.jsp");
             }
+            else if(strings[1].equals("recipecontent")){
+
+            }
 
             //--------------------------------------------------------------------------------------------------------
 
