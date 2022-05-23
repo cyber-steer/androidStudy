@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class Recipes extends AppCompatActivity {
-    Button btnLogout;
+    Button btnLogout, btnAdd;
     LinearLayout memberLayout, nonMemberLayout;
     ImageView imgFavorite;
     TextView toolbarName, userName;
@@ -61,6 +61,14 @@ public class Recipes extends AppCompatActivity {
             nonMemberLayout.setVisibility(View.VISIBLE);
         }
 
+        btnAdd = findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),RecipesInsert.class));
+                finish();
+            }
+        });
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

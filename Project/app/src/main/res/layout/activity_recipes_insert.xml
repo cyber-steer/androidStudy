@@ -16,14 +16,191 @@
         <include
             layout="@layout/main_toolbar"/>
 
-        <TextView
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Recipes Insert"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:orientation="vertical"
+            android:padding="10dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="레시피 추가"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="이름"
+                    android:textSize="16dp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/etRecipesName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_outline_rectangle"
+                    android:hint="칵테일 이름"
+                    android:textSize="16dp"
+                    android:padding="10dp"/>
+            </LinearLayout>
+            <EditText
+                android:id="@+id/etRecipesContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="내용"
+                android:textSize="16dp"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:minLines="6"
+                android:background="@drawable/bg_outline_rectangle"
+                android:gravity="left"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/line"
+                android:layout_marginVertical="20dp"/>
+
+            <LinearLayout
+                android:id="@+id/meterial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="칵테일 재료"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etBase"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_outline_rectangle"
+                        android:hint="베이스"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center"/>
+                    <EditText
+                        android:id="@+id/etBaseVoluem"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:hint="용량(ml)"
+                        android:padding="10dp"
+                        android:textSize="16dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_outline_rectangle"/>
+
+                    <Button
+                        android:id="@+id/btnMeterialRemove"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/ic_remove"
+                        android:layout_gravity="center"/>
+                    <Button
+                        android:id="@+id/btnMeterialAdd"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/ic_add"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/line"
+                android:layout_marginVertical="20dp"/>
+
+            <LinearLayout
+                android:id="@+id/formalities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="칵테일 만들기"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginBottom="30dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"/>
+                    <EditText
+                        android:id="@+id/etFormalities"
+                        android:layout_width="265dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_outline_rectangle"
+                        android:hint="1번째 순서"
+                        android:textSize="16dp"
+                        android:padding="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center"/>
+                    <Button
+                        android:id="@+id/btnFormalitiesRemove"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/ic_remove"
+                        android:layout_gravity="center"/>
+                    <Button
+                        android:id="@+id/btnFormalitiesAdd"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/ic_add"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+            </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:src="@drawable/line"
+                    android:layout_marginVertical="20dp"/>
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="저장"/>
+
+        </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
     <RelativeLayout

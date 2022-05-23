@@ -2,22 +2,35 @@ package com.example.project;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.project.manager.DbConect;
 import com.example.project.manager.SessionManager;
 
+import java.util.ArrayList;
+
 public class RecipesInsert extends AppCompatActivity {
-    Button btnLogout;
+    LinearLayout meterial, formalities;
+    ArrayList<Integer[]> meterialId;
+    ArrayList<Integer> formalitiesId;
+    Button btnLogout, btnSave, btnMeterialAdd, btnMeterialRemove,btnFormalitiesRemove,btnFormalitiesAdd;
     LinearLayout memberLayout, nonMemberLayout;
     TextView toolbarName, userName;
+    EditText etBase, etBaseVoluem, etFormalities, etRecipesName, etRecipesContent;
     DrawerLayout drawerLayout;
 
     SessionManager sessionManager;
@@ -33,6 +46,137 @@ public class RecipesInsert extends AppCompatActivity {
         toolbarName.setText("게시판");
 
         sessionManager = new SessionManager(getApplicationContext());
+        
+        etRecipesName = findViewById(R.id.etRecipesName);
+        etRecipesContent = findViewById(R.id.etRecipesContent);
+        etBase = findViewById(R.id.etBase);
+        etBaseVoluem = findViewById(R.id.etBaseVoluem);
+        etFormalities = findViewById(R.id.etFormalities);
+
+        meterialId = new ArrayList<>();
+        formalitiesId = new ArrayList<>();
+
+        meterial = findViewById(R.id.meterial);
+        formalities = findViewById(R.id.formalities);
+
+        btnMeterialAdd = findViewById(R.id.btnMeterialAdd);
+        btnMeterialAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout linearLayout = (LinearLayout) createLinearLayoutMeterial(view.getContext(), (LinearLayout) meterial.getChildAt(meterial.getChildCount()-1));
+                meterial.addView(linearLayout);
+            }
+        });
+        btnMeterialRemove = findViewById(R.id.btnMeterialRemove);
+        btnMeterialRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(meterial.getChildCount()>2){
+                    LinearLayout original =  (LinearLayout) meterial.getChildAt(meterial.getChildCount()-1);
+                    Button originalRemove = (Button) original.getChildAt(2);
+                    Button originalAdd = (Button) original.getChildAt(3);
+                    original.removeViewAt(3);
+                    original.removeViewAt(2);
+                    LinearLayout linearLayout = (LinearLayout) meterial.getChildAt(meterial.getChildCount()-2);
+                    linearLayout.addView(originalRemove);
+                    linearLayout.addView(originalAdd);
+                    meterialId.remove(meterialId.size()-1);
+                    meterial.removeViewAt(meterial.getChildCount()-1);
+                }
+                else{
+                    Toast.makeText(RecipesInsert.this, "최소한 하나이상은 입력해야합니다", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        btnFormalitiesAdd = findViewById(R.id.btnFormalitiesAdd);
+        btnFormalitiesAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout linearLayout = (LinearLayout) createLinearLayoutFormalities(view.getContext(),(LinearLayout) formalities.getChildAt(formalities.getChildCount()-1));
+                formalities.addView(linearLayout);
+            }
+        });
+        btnFormalitiesRemove = findViewById(R.id.btnFormalitiesRemove);
+        btnFormalitiesRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (formalities.getChildCount()>2){
+                    LinearLayout original =  (LinearLayout) formalities.getChildAt(formalities.getChildCount()-1);
+                    Button originalRemove = (Button) original.getChildAt(2);
+                    Button originalAdd = (Button) original.getChildAt(3);
+                    original.removeViewAt(3);
+                    original.removeViewAt(2);
+                    LinearLayout linearLayout = (LinearLayout) formalities.getChildAt(formalities.getChildCount()-2);
+                    linearLayout.addView(originalRemove);
+                    linearLayout.addView(originalAdd);
+                    formalitiesId.remove(formalitiesId.size()-1);
+                    formalities.removeViewAt(formalities.getChildCount()-1);
+                }
+                else{
+                    Toast.makeText(RecipesInsert.this, "최소한 하나이상은 입력해야합니다", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        btnSave = findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String meterialStr = etBase.getText().toString().trim();
+                String voluemStr=etBaseVoluem.getText().toString().trim();
+                String formalitiesStr=etFormalities.getText().toString().trim();
+                String recipesName = etRecipesName.getText().toString().trim();
+                String recipesContent = etRecipesContent.getText().toString().trim();
+
+                String check="true";
+                if(meterialStr.equals("")||voluemStr.equals("")||formalitiesStr.equals("")||recipesName.equals("")||recipesContent.equals("")){
+                    check="false";
+                }
+
+                for(int i=0;i<meterialId.size();i++){
+                    meterialStr += "-";
+                    EditText editText = findViewById(meterialId.get(i)[0]);
+                    String str = editText.getText().toString();
+                    if (str.equals("")){
+                        check = "false";
+                    }
+                    meterialStr += str;
+                }
+                for(int i=0;i<meterialId.size();i++){
+                    voluemStr += "-";
+                    EditText editText = findViewById(meterialId.get(i)[1]);
+                    String str = editText.getText().toString();
+                    if (str.equals("")){
+                        check = "false";
+                    }
+                    voluemStr += str;
+                }
+                for(int i=0;i<formalitiesId.size();i++){
+                    formalitiesStr += "-";
+                    EditText editText = findViewById(formalitiesId.get(i));
+                    String str = editText.getText().toString();
+                    if (str.equals("")){
+                        check = "false";
+                    }
+                    formalitiesStr += str;
+                }
+                if(check.equals("false")){
+                    Toast.makeText(RecipesInsert.this, "비어있는 입력이 있습니다", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    DbConect dbConect = new DbConect();
+
+                }
+                System.out.println("1st : "+meterialStr);
+                System.out.println("2st : "+voluemStr);
+                System.out.println("3st : "+formalitiesStr);
+                System.out.println(recipesName);
+                System.out.println(recipesContent);
+                System.out.println(recipesName+","+recipesContent+","+ meterialStr +","+voluemStr+","+formalitiesStr);
+            }
+        });
+
 
         userName = findViewById(R.id.nickName);
         memberLayout = findViewById(R.id.memberLayout);
@@ -76,6 +220,119 @@ public class RecipesInsert extends AppCompatActivity {
             }
         });
     }
+    @SuppressLint("ResourceType")
+    public View createLinearLayoutMeterial(Context context, LinearLayout original){
+        LinearLayout parent = (LinearLayout) original.getParent();
+        LinearLayout linearLayout = new LinearLayout(context);
+        EditText name = new EditText(context);
+        EditText voluem = new EditText(context);
+
+        Button originalRemove = (Button) original.getChildAt(2);
+        Button originalAdd = (Button) original.getChildAt(3);
+        original.removeViewAt(3);
+        original.removeViewAt(2);
+
+        int nameWidth = original.getChildAt(0).getLayoutParams().width;
+        int voluemWidth = original.getChildAt(1).getLayoutParams().width;
+
+        int leftPadding = original.getChildAt(0).getPaddingLeft();
+        int topPadding = original.getChildAt(0).getPaddingTop();
+        int rightPadding = original.getChildAt(0).getPaddingRight();
+        int bottomPadding = original.getChildAt(0).getPaddingBottom();
+
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+        name.setId(10+parent.getChildCount()-2);
+        name.setHint("재료");
+        name.setTextSize(16);
+        name.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
+        name.setBackground(ContextCompat.getDrawable(context,R.drawable.bg_outline_rectangle));
+
+        voluem.setId(20+parent.getChildCount()-2);
+        voluem.setHint("용량(ml)");
+        voluem.setTextSize(16);
+        voluem.setPadding(leftPadding, topPadding, rightPadding, bottomPadding);
+        voluem.setBackground(ContextCompat.getDrawable(context,R.drawable.bg_outline_rectangle));
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(original.getLayoutParams());
+        params.topMargin = 24;
+        linearLayout.setLayoutParams(params);
+
+        LinearLayout.LayoutParams nameParam = (new LinearLayout.LayoutParams(nameWidth, params.height));
+        nameParam.rightMargin = 24;
+        name.setLayoutParams(nameParam);
+
+        LinearLayout.LayoutParams voluemParam = (new LinearLayout.LayoutParams(voluemWidth, params.height));
+        voluemParam.rightMargin = 24;
+        voluem.setLayoutParams(voluemParam);
+
+        linearLayout.addView(name);
+        linearLayout.addView(voluem);
+        linearLayout.addView(originalRemove);
+        linearLayout.addView(originalAdd);
+
+        Integer[] id = new Integer[2];
+        id[0] = name.getId();
+        id[1] = voluem.getId();
+
+        meterialId.add(id);
+
+        return linearLayout;
+    }
+    public LinearLayout createLinearLayoutFormalities(Context context, LinearLayout original){
+        LinearLayout parent = (LinearLayout) original.getParent();
+        LinearLayout linearLayout = new LinearLayout(context);
+        TextView textView = new TextView(context);
+        EditText editText = new EditText(context);
+
+        int tvWidth = original.getChildAt(0).getLayoutParams().width;
+        int tvHeight = original.getChildAt(0).getLayoutParams().height;
+        int width = original.getChildAt(1).getLayoutParams().width;
+        int height = original.getChildAt(1).getLayoutParams().height;
+        int leftPadding = original.getChildAt(1).getPaddingLeft();
+        int topPadding = original.getChildAt(1).getPaddingTop();
+        int rightPadding = original.getChildAt(1).getPaddingRight();
+        int bottomPadding = original.getChildAt(1).getPaddingBottom();
+
+        Button originalRemove = (Button) original.getChildAt(2);
+        Button originalAdd = (Button) original.getChildAt(3);
+        original.removeViewAt(3);
+        original.removeViewAt(2);
+
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(original.getLayoutParams());
+        params.topMargin = 24;
+        linearLayout.setLayoutParams(params);
+
+        LinearLayout.LayoutParams textParam = new LinearLayout.LayoutParams(tvWidth,tvHeight);
+        textParam.rightMargin = 24;
+        textView.setLayoutParams(textParam);
+        textView.setText((parent.getChildCount())+"");
+        textView.setTextSize(16);
+
+        editText.setId(30+parent.getChildCount()-2);
+        editText.setHint(parent.getChildCount()+"번째 순서");
+        editText.setBackground(ContextCompat.getDrawable(context,R.drawable.bg_outline_rectangle));
+        LinearLayout.LayoutParams editParams = new LinearLayout.LayoutParams(width,height);
+        editParams.rightMargin = 24;
+        editText.setLayoutParams(editParams);
+        editText.setPadding(leftPadding,topPadding,rightPadding,bottomPadding);
+
+
+
+        linearLayout.addView(textView);
+        linearLayout.addView(editText);
+        linearLayout.addView(originalRemove);
+        linearLayout.addView(originalAdd);
+
+        formalitiesId.add(editText.getId());
+
+        return linearLayout;
+    }
+
+
     public void ClickMenu(View view){
         MainActivity.openDrawer(drawerLayout);
     }
