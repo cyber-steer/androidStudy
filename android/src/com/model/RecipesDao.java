@@ -51,5 +51,43 @@ public class RecipesDao {
 		}
 		return returns;
 	}
+	public String selectName(String name) {
+		String sql = "SELECT * FROM recipes WHERE recipesname='"+name+"';";
+		String returns="fail";
+		try (
+			Connection con = getConnection();
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+		){
+			if(rs.next()) {
+				returns = rs.getString("proof");
+			}
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+		
+	}
+	public String insert(RecipesDto dto) {
+		String sql = "INSERT INTO recipes (recipesName, proof, base) VALUES(?,?,?);";
+		String returns="fail";
+		try (
+			Connection con = getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+		){
+			pstmt.setString(1, dto.getName());
+			pstmt.setString(2, dto.getProof()+"");
+			pstmt.setString(3, dto.getBase());
+			pstmt.executeUpdate();
+			returns = "true";
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
 
 }

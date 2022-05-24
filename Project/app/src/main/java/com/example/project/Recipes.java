@@ -61,6 +61,16 @@ public class Recipes extends AppCompatActivity {
             nonMemberLayout.setVisibility(View.VISIBLE);
         }
 
+        Intent intent = getIntent();
+        int tabIndex = intent.getIntExtra("tabIndex",-1);
+        if(tabIndex != -1){
+            TabLayout.Tab[] tab = new TabLayout.Tab[6];
+            for(int i=0;i<6;i++){
+                tab[i] = tabLayout.getTabAt(i);
+            }
+            tabLayout.selectTab(tab[tabIndex]);
+        }
+
         btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,9 +12,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +33,10 @@ public class RecipesInsert extends AppCompatActivity {
     Button btnLogout, btnSave, btnMeterialAdd, btnMeterialRemove,btnFormalitiesRemove,btnFormalitiesAdd;
     LinearLayout memberLayout, nonMemberLayout;
     TextView toolbarName, userName;
-    EditText etBase, etBaseVoluem, etFormalities, etRecipesName,etRecipesProof, etRecipesContent;
+    EditText etBase, etVoluem, etBaseVoluem, etFormalities, etRecipesName,etRecipesProof, etRecipesContent;
     DrawerLayout drawerLayout;
+    Spinner spinner;
+    String base;
 
     SessionManager sessionManager;
 
@@ -46,10 +51,28 @@ public class RecipesInsert extends AppCompatActivity {
         toolbarName.setText("게시판");
 
         sessionManager = new SessionManager(getApplicationContext());
-        
+
+        spinner = findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter =ArrayAdapter.createFromResource(
+            this,R.array.bases_array, android.R.layout.simple_spinner_dropdown_item
+        );
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                base =adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         etRecipesName = findViewById(R.id.etRecipesName);
         etRecipesContent = findViewById(R.id.etRecipesContent);
         etBase = findViewById(R.id.etBase);
+        etVoluem = findViewById(R.id.etVoluem);
         etBaseVoluem = findViewById(R.id.etBaseVoluem);
         etFormalities = findViewById(R.id.etFormalities);
         etRecipesProof = findViewById(R.id.etRecipesProof);
@@ -125,7 +148,7 @@ public class RecipesInsert extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String meterialStr = etBase.getText().toString().trim();
-                String voluemStr=etBaseVoluem.getText().toString().trim();
+                String voluemStr = etBaseVoluem.getText().toString().trim()+"-"+etVoluem.getText().toString().trim();
                 String formalitiesStr=etFormalities.getText().toString().trim();
                 String recipesName = etRecipesName.getText().toString().trim();
                 String recipesContent = etRecipesContent.getText().toString().trim();
@@ -163,11 +186,18 @@ public class RecipesInsert extends AppCompatActivity {
                     }
                     formalitiesStr += str;
                 }
+                if(base.equals("베이스를 선택하세요")){
+                    check = "nobase";
+                }
                 if(check.equals("false")){
                     Toast.makeText(RecipesInsert.this, "비어있는 입력이 있습니다", Toast.LENGTH_SHORT).show();
                 }
+                else if(check.equals("nobase")){
+                    Toast.makeText(RecipesInsert.this, "베이스를 선택하세요", Toast.LENGTH_SHORT).show();
+
+                }
                 else{
-                    String msg = recipesName+","+proof+","+recipesContent+","+meterialStr+","+voluemStr+","+formalitiesStr;
+                    String msg = recipesName+","+proof+","+recipesContent+","+meterialStr+","+voluemStr+","+formalitiesStr+","+base;
 
                     DbConect conect = new DbConect();
                     String result="";
@@ -184,7 +214,8 @@ public class RecipesInsert extends AppCompatActivity {
                         Toast.makeText(RecipesInsert.this, "에러발생", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        startActivity(null);
+                        //정상 처리 결과
+                        startActivity(new Intent(getApplicationContext(), Recipes.class));
                     }
 
 

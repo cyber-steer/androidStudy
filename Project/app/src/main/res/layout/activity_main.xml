@@ -29,6 +29,7 @@
                 android:layout_weight="1">
 
                 <Button
+                    android:id="@+id/btnVodka"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:background="@drawable/circle"
@@ -36,6 +37,7 @@
                     android:textSize="29dp"
                     android:layout_marginRight="50dp"/>
                 <Button
+                    android:id="@+id/btnTequila"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:background="@drawable/circle"
@@ -51,6 +53,7 @@
                 android:layout_weight="1">
 
                 <Button
+                    android:id="@+id/btnGin"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:background="@drawable/circle"
@@ -58,6 +61,7 @@
                     android:textSize="29dp"
                     android:layout_marginRight="50dp"/>
                 <Button
+                    android:id="@+id/btnBrandy"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:background="@drawable/circle"
@@ -72,6 +76,7 @@
                 android:layout_weight="1">
 
                 <Button
+                    android:id="@+id/btnRum"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:background="@drawable/circle"
@@ -79,6 +84,7 @@
                     android:textSize="29dp"
                     android:layout_marginRight="50dp"/>
                 <Button
+                    android:id="@+id/btnWhisky"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:background="@drawable/circle"

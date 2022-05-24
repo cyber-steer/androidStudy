@@ -95,18 +95,47 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="165dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_outline_rectangle"
+                        android:prompt="@string/base_prompt"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_drop_down"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"/>
+                    <EditText
+                        android:id="@+id/etBaseVoluem"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:hint="용량(ml)"
+                        android:padding="10dp"
+                        android:textSize="16dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_outline_rectangle"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
                     <EditText
                         android:id="@+id/etBase"
                         android:layout_width="190dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_outline_rectangle"
-                        android:hint="베이스"
+                        android:hint="재료"
                         android:textSize="16dp"
                         android:padding="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_gravity="center"/>
                     <EditText
-                        android:id="@+id/etBaseVoluem"
+                        android:id="@+id/etVoluem"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:hint="용량(ml)"

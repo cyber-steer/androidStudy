@@ -15,69 +15,144 @@
 
         <include
             layout="@layout/main_toolbar"/>
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@color/black"/>
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="재료"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="첫번째 \n두번째줄"
-                    android:textSize="30dp"
-                    android:layout_marginLeft="20dp"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
 
 
-            </LinearLayout>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:src="@drawable/line"
-                android:layout_marginVertical="20dp"
-                android:layout_marginHorizontal="10dp"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="이름"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="20dp" />
+                </LinearLayout>
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="순서"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvContent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="첫번째\n두번째\n세번째"
-                    android:textSize="30dp"
-                    android:layout_marginLeft="20dp"/>
+                    android:background="@drawable/bg_outline_rectangle"
+                    android:minLines="5"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvProof"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="도수 : 100"
+                        android:textSize="20dp"
+                        android:layout_weight="1"/>
+                    <ImageView
+                        android:id="@+id/favorite"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:srcCompat="@drawable/ic_unstar"
+                        android:scaleType="fitEnd"/>
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:src="@drawable/line"
+                    android:layout_marginVertical="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_outline_rectangle"
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="재료"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"/>
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/line"
+                        android:layout_marginHorizontal="5dp"/>
+                    <TextView
+                        android:id="@+id/tvMeterial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:text="첫번째입니다\n두번째\n세번째\n"
+                        android:layout_marginRight="20dp"/>
+                    <TextView
+                        android:id="@+id/tvVoluem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:text="첫번째\n두번째\n세번째\n"/>
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:src="@drawable/line"
+                    android:layout_marginVertical="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_outline_rectangle"
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="순서"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"/>
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/line"
+                        android:layout_marginHorizontal="5dp"/>
+                    <TextView
+                        android:id="@+id/tvFormalities"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16dp"
+                        android:text="첫번째입니다\n두번째\n세번째\n"
+                        android:layout_marginRight="20dp"/>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btnBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="뒤로가기"/>
             </LinearLayout>
-
-
-        </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

@@ -3,9 +3,9 @@ package com.model;
 public class MeterialDto {
 	String recipesname;
 	String meterialname;
-	String voluem;
+	int voluem;
 	
-	public MeterialDto(String recipesname, String meterialname, String voluem) {
+	public MeterialDto(String recipesname, String meterialname, int voluem) {
 		super();
 		this.recipesname = recipesname;
 		this.meterialname = meterialname;
@@ -23,10 +23,10 @@ public class MeterialDto {
 	public void setMeterialname(String meterialname) {
 		this.meterialname = meterialname;
 	}
-	public String getVoluem() {
+	public int getVoluem() {
 		return voluem;
 	}
-	public void setVoluem(String voluem) {
+	public void setVoluem(int voluem) {
 		this.voluem = voluem;
 	}
 }

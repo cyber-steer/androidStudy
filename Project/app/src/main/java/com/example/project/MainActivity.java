@@ -21,8 +21,10 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout memberLayout, nonMemberLayout;
     TextView toolbarName, userName;
     DrawerLayout drawerLayout;
+    Button btnVodka, btnGin, btnRum, btnTequila, btnBrandy,btnWhisky;
 
     SessionManager sessionManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,68 @@ public class MainActivity extends AppCompatActivity {
             memberLayout.setVisibility(View.INVISIBLE);
             nonMemberLayout.setVisibility(View.VISIBLE);
         }
+
+        btnVodka = findViewById(R.id.btnVodka);
+        btnGin = findViewById(R.id.btnGin);
+        btnRum = findViewById(R.id.btnRum);
+        btnTequila = findViewById(R.id.btnTequila);
+        btnBrandy = findViewById(R.id.btnBrandy);
+        btnWhisky = findViewById(R.id.btnWhisky);
+
+        btnVodka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Recipes.class);
+                intent.putExtra("tabIndex",0);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnGin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Recipes.class);
+                intent.putExtra("tabIndex",1);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnRum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Recipes.class);
+                intent.putExtra("tabIndex",2);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnTequila.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Recipes.class);
+                intent.putExtra("tabIndex",3);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnBrandy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Recipes.class);
+                intent.putExtra("tabIndex",4);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnWhisky.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Recipes.class);
+                intent.putExtra("tabIndex",5);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {

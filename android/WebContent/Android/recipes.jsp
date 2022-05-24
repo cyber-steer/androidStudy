@@ -14,8 +14,5 @@
 	if(type.equals("selectBase")){
 		out.print(dao.selectBase(base));
 	}
-	else if(type.equals("updateFavorite")){
-		out.print(dao.updateFavorite(name, favorite));
-	}
 
 %>
