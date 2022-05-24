@@ -18,7 +18,7 @@ import com.example.project.manager.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
     Button btnLogout;
-    LinearLayout memberLayout, nonMemberLayout;
+    LinearLayout memberLayout, nonMemberLayout, toolbarLayout;
     TextView toolbarName, userName;
     DrawerLayout drawerLayout;
     Button btnVodka, btnGin, btnRum, btnTequila, btnBrandy,btnWhisky;
@@ -33,7 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
+        toolbarLayout = findViewById(R.id.toolbarLayout);
         toolbarName.setText("메인");
+        toolbarLayout.removeViewAt(3);
+        toolbarLayout.removeViewAt(2);
+        toolbarName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         sessionManager = new SessionManager(getApplicationContext());
 

@@ -9,40 +9,34 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.project.adapter.BoardAdapter;
-import com.example.project.adapter.FavoriteAdapter;
 import com.example.project.manager.DbConect;
 import com.example.project.manager.SessionManager;
-import com.example.project.model.BoardDto;
 
-import java.util.ArrayList;
-
-public class Board extends AppCompatActivity {
-    Button btnLogout, btnAdd;
+public class BoardInsert extends AppCompatActivity {
+    Button btnLogout, btnCancle, btnAdd;
     LinearLayout memberLayout, nonMemberLayout;
     TextView toolbarName, userName;
     DrawerLayout drawerLayout;
-    ListView listView;
+    EditText etTitle, etContent;
 
     SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board);
+        setContentView(R.layout.activity_board_insert);
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
-        toolbarName.setText("게시판");
+        toolbarName.setText("정보");
 
         sessionManager = new SessionManager(getApplicationContext());
-
-        select("selectBoard");
 
         userName = findViewById(R.id.nickName);
         memberLayout = findViewById(R.id.memberLayout);
@@ -57,15 +51,36 @@ public class Board extends AppCompatActivity {
             nonMemberLayout.setVisibility(View.VISIBLE);
         }
 
+        etTitle = findViewById(R.id.etTitle);
+        etContent = findViewById(R.id.etContent);
         btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),BoardInsert.class));
-                finish();
+                String nickName = sessionManager.getNickName();
+                String title = etTitle.getText().toString().trim();
+                String content= etContent.getText().toString();
+
+                DbConect conect = new DbConect();
+                String result = "";
+                
+                try{
+                    result = conect.execute("insertBoard","board",nickName, title,content).get();
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                if(result.equals("fail")){
+                    Toast.makeText(BoardInsert.this, "저장 실패", Toast.LENGTH_SHORT).show();
+                }
+                else if(result.equals("error")){
+                    Toast.makeText(BoardInsert.this, "에러 발생", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(BoardInsert.this, "저장성공", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
+        
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +110,6 @@ public class Board extends AppCompatActivity {
             }
         });
     }
-
     public void ClickMenu(View view){
         MainActivity.openDrawer(drawerLayout);
     }
@@ -131,6 +145,9 @@ public class Board extends AppCompatActivity {
             alertDialog.show();
         }
     }
+    public void ClickSignIn(View view){
+        MainActivity.redirectActivity(this,SignIn.class);
+    }
     public void ClickSignUp(View view){
         MainActivity.redirectActivity(this,SignUp.class);
     }
@@ -138,12 +155,9 @@ public class Board extends AppCompatActivity {
     public void ClickHome(View view){
         MainActivity.redirectActivity(this, MainActivity.class);
     }
-    public void ClickSignIn(View view){
-        MainActivity.redirectActivity(this,SignIn.class);
-    }
 
     public void ClickBoard(View view){
-        recreate();
+        MainActivity.redirectActivity(this, Board.class);
     }
     public void ClickInfo(View view){
         MainActivity.redirectActivity(this, Info.class);
@@ -157,42 +171,5 @@ public class Board extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         MainActivity.closeDrawer(drawerLayout);
-    }
-    public void select(String ...strings){
-        listView = findViewById(R.id.listView);
-        BoardAdapter adapter = new BoardAdapter();
-        listView.setAdapter(adapter);
-
-        ArrayList<BoardDto> dtos = new ArrayList<>();
-        String result="";
-        DbConect conect = new DbConect();
-        try {
-            if(strings[0].equals("selectBoard")){
-                result = conect.execute(strings[0],"board").get();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        if(result.equals("fail")){
-            Toast.makeText(this, "검색 결과가 없습니다", Toast.LENGTH_SHORT).show();
-        }
-        else if(result.equals("error")){
-            Toast.makeText(this, "에러 발생", Toast.LENGTH_SHORT).show();
-        }
-        else if(result.equals("")){
-            Toast.makeText(this, "ㅈ됨", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            String[] title = result.split(",")[0].split(" ");
-            String[] nickName = result.split(",")[1].split(" ");
-            String[] date = result.split(",")[2].split(" ");
-            for(int i=0;i<title.length;i++){
-                BoardDto dto = new BoardDto();
-                dto.setTitle(title[i]);
-                dto.setNickName(nickName[i]);
-                dto.setDate(date[i]);
-                adapter.addItem(dto);
-            }
-        }
     }
 }

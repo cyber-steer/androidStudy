@@ -6,6 +6,7 @@
 	String type = request.getParameter("type");
 	String id = request.getParameter("userid");
 	String name = request.getParameter("recipesname");
+	String keyWord = request.getParameter("keyword");
 
 	FavoriteDao dao = new FavoriteDao();
 	
@@ -20,6 +21,10 @@
 	}
 	else if(type.equals("deleteFavorite")){
 		out.print(dao.deleteFavorite(id, name));
+	}
+	else if(type.equals("selectFavoriteRecipe")){
+		out.print(dao.selectFavoriteRecipe(id, keyWord));
+		
 	}
 
 %>

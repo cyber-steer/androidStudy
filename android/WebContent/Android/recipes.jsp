@@ -7,12 +7,18 @@
 	String type = request.getParameter("type");
 	String base = request.getParameter("base");
 	String name = request.getParameter("name");
-	String favorite = request.getParameter("favorite");
+	String keyword = request.getParameter("keyword");
 
 	RecipesDao dao = new RecipesDao();
 	
 	if(type.equals("selectBase")){
 		out.print(dao.selectBase(base));
+	}
+	else if(type.equals("selectRecipe")){
+		out.print(dao.selectRecipe(keyword));
+	}
+	else if(type.equals("deleteRecipe")){
+		out.print(dao.deleteRecipe(name));
 	}
 
 %>

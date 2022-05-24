@@ -8,7 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,12 +27,13 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class Recipes extends AppCompatActivity {
-    Button btnLogout, btnAdd;
+    Button btnLogout, btnAdd, btnDelete;
     LinearLayout memberLayout, nonMemberLayout;
-    ImageView imgFavorite;
+    ImageView imgFavorite, search;
     TextView toolbarName, userName;
     DrawerLayout drawerLayout;
     TabLayout tabLayout;
+    EditText etSearch;
 
     SessionManager sessionManager;
 
@@ -71,6 +74,31 @@ public class Recipes extends AppCompatActivity {
             tabLayout.selectTab(tab[tabIndex]);
         }
 
+        etSearch = findViewById(R.id.etSearch);
+        search = findViewById(R.id.search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String keyWord = etSearch.getText().toString().trim();
+                if (keyWord.equals("")){
+                    tabLayout.setVisibility(View.VISIBLE);
+                    ViewGroup.LayoutParams params = tabLayout.getLayoutParams();
+                    params.height = 125;
+                    tabLayout.setLayoutParams(params);
+                    int i = tabLayout.getSelectedTabPosition();
+                    select("selectBase",(String) tabLayout.getTabAt(i).getContentDescription());
+                }
+                else{
+                    tabLayout.setVisibility(View.INVISIBLE);
+                    ViewGroup.LayoutParams params = tabLayout.getLayoutParams();
+                    params.height = 0;
+                    tabLayout.setLayoutParams(params);
+                    select("selectRecipe", keyWord);
+                }
+
+            }
+        });
+
         btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,13 +137,13 @@ public class Recipes extends AppCompatActivity {
         });
 
         int i = tabLayout.getSelectedTabPosition();
-        clickTab((String) tabLayout.getTabAt(i).getContentDescription());
+        select("selectBase",(String) tabLayout.getTabAt(i).getContentDescription());
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int i = tabLayout.getSelectedTabPosition();
-                clickTab((String) tabLayout.getTabAt(i).getContentDescription());
+                select("selectBase",(String) tabLayout.getTabAt(i).getContentDescription());
             }
 
             @Override
@@ -194,7 +222,7 @@ public class Recipes extends AppCompatActivity {
         MainActivity.closeDrawer(drawerLayout);
     }
 
-    private void clickTab(String base){
+    private void select(String ...strings){
         ListView listView = findViewById(R.id.listView);
         RecipesAdapter adapter = new RecipesAdapter();
         listView.setAdapter(adapter);
@@ -204,7 +232,13 @@ public class Recipes extends AppCompatActivity {
         String result="";
         DbConect conect = new DbConect();
         try {
-            result = conect.execute("selectBase","recipes",base).get();
+
+            if (strings[0].equals("selectBase")){
+                result = conect.execute("selectBase","recipes",strings[1]).get();
+            }
+            else if(strings[0].equals("selectRecipe")){
+                result = conect.execute("selectRecipe","recipes",strings[1]).get();
+            }
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

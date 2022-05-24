@@ -51,6 +51,36 @@ public class RecipesDao {
 		}
 		return returns;
 	}
+	public String selectRecipe(String keyWord) {
+		ArrayList<RecipesDto> dtos = new ArrayList<RecipesDto>();
+		String sql = "SELECT * FROM recipes WHERE recipesname LIKE '%"+keyWord+"%';;";
+		String returns="fail";
+		try (
+			Connection con = getConnection();
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+		){
+			while(rs.next()) {
+				RecipesDto dto = new RecipesDto();
+				dto.setName(rs.getString("recipesname"));
+				dto.setProof(rs.getDouble("proof"));
+				dtos.add(dto);
+			}
+
+			if(dtos.size() >0) {
+				returns = "";
+				for(RecipesDto dto :dtos) {
+					returns += dto.getName() +",";
+					returns += dto.getProof() +",";
+				}
+			}
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
 	public String selectName(String name) {
 		String sql = "SELECT * FROM recipes WHERE recipesname='"+name+"';";
 		String returns="fail";
@@ -81,6 +111,31 @@ public class RecipesDao {
 			pstmt.setString(2, dto.getProof()+"");
 			pstmt.setString(3, dto.getBase());
 			pstmt.executeUpdate();
+			returns = "true";
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
+	public String deleteRecipe(String name) {
+		String sql = "DELETE FROM formalities WHERE recipesName='"+name+"';";
+		String returns="fail";
+		try (
+			Connection con = getConnection();
+			Statement stmt = con.createStatement();
+		){
+			stmt.executeUpdate(sql);
+			sql = "DELETE FROM meterial WHERE recipesName='"+name+"';";
+			stmt.executeUpdate(sql);
+			sql = "DELETE FROM recipecontent WHERE recipesName='"+name+"';";
+			stmt.executeUpdate(sql);
+			sql = "DELETE FROM favorite WHERE recipesName='"+name+"';";
+			stmt.executeUpdate(sql);
+			sql = "DELETE FROM recipes WHERE recipesName='"+name+"';";
+			stmt.executeUpdate(sql);
+			
 			returns = "true";
 			
 		} catch (Exception e) {

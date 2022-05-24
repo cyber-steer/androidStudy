@@ -33,11 +33,17 @@ public class DbConect extends AsyncTask<String, Void, String> {
             else if(strings[1].equals("recipecontent")){
                 url = new URL("http://10.0.2.2:8080/android/Android/recipescontent.jsp");
             }
+            else if(strings[1].equals("board")){
+                url = new URL("http://10.0.2.2:8080/android/Android/Board.jsp");
+            }
 
             //--------------------------------------------------------------------------------------------------------
 
             if(strings[0].equals("selectBase")){
-                sendMsg = "type="+strings[0]+"&table="+strings[1]+"&base="+strings[2];
+                sendMsg = "type="+strings[0]+"&base="+strings[2];
+            }
+            if(strings[0].equals("selectRecipe")){
+                sendMsg = "type="+strings[0]+"&keyword="+strings[2];
             }
             else if(strings[0].equals("selectFavorite")){
                 sendMsg = "type="+strings[0]+"&userid="+strings[2];
@@ -62,6 +68,19 @@ public class DbConect extends AsyncTask<String, Void, String> {
             }
             else if(strings[0].equals("selectRecipecontent")){
                 sendMsg = "type="+strings[0]+"&name="+strings[2];
+            }
+            else if(strings[0].equals("selectFavoriteRecipe")){
+                sendMsg = "type="+strings[0]+"&userid="+strings[2]+"&keyword="+strings[3];
+            }
+            else if(strings[0].equals("deleteRecipe")){
+                sendMsg = "type="+strings[0]+"&name="+strings[2];
+            }
+            else if(strings[0].equals("selectBoard")){
+                sendMsg = "type="+strings[0];
+            }
+            else if(strings[0].equals("insertBoard")){
+                sendMsg = "type="+strings[0]+"&nickName="+strings[2]+"&title="+strings[3]+"&content="+strings[4];
+
             }
             //--------------------------------------------------------------------------------------------------------
 

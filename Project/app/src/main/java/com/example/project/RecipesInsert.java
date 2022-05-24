@@ -31,7 +31,7 @@ public class RecipesInsert extends AppCompatActivity {
     ArrayList<Integer[]> meterialId;
     ArrayList<Integer> formalitiesId;
     Button btnLogout, btnSave, btnMeterialAdd, btnMeterialRemove,btnFormalitiesRemove,btnFormalitiesAdd;
-    LinearLayout memberLayout, nonMemberLayout;
+    LinearLayout memberLayout, nonMemberLayout, toolbarLayout;
     TextView toolbarName, userName;
     EditText etBase, etVoluem, etBaseVoluem, etFormalities, etRecipesName,etRecipesProof, etRecipesContent;
     DrawerLayout drawerLayout;
@@ -48,7 +48,11 @@ public class RecipesInsert extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
-        toolbarName.setText("게시판");
+        toolbarName.setText("레시피");
+        toolbarLayout = findViewById(R.id.toolbarLayout);
+        toolbarLayout.removeViewAt(3);
+        toolbarLayout.removeViewAt(2);
+        toolbarName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         sessionManager = new SessionManager(getApplicationContext());
 

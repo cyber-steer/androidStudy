@@ -1,5 +1,6 @@
 package com.example.project.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -100,6 +102,30 @@ public class RecipesAdapter extends BaseAdapter {
                 }
                 if(result.equals("false")){
                     Toast.makeText(viewGroup.getContext(), "error", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        Button btnDelete = view.findViewById(R.id.btnDelete);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DbConect conect = new DbConect();
+                String result="";
+                try{
+                    result = conect.execute("deleteRecipe","recipes",dto.getName()).get();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                if(result.equals("fail")){
+                    Toast.makeText(viewGroup.getContext(), "삭제를 실패했습니다", Toast.LENGTH_SHORT).show();
+                }
+                else if(result.equals("error")){
+                    Toast.makeText(viewGroup.getContext(), "에러 발생", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Activity activity = (Activity) viewGroup.getContext();
+                    activity.recreate();
                 }
             }
         });

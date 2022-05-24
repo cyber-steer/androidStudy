@@ -33,7 +33,38 @@ public class FavoriteDao {
 			ResultSet rs = stmt.executeQuery(sql);
 		){
 			while(rs.next()) {
-				System.out.println("true");
+				RecipesDto dto = new RecipesDto();
+				dto.setName(rs.getString("recipesname"));
+				dto.setProof(rs.getDouble("proof"));
+				dtos.add(dto);
+			}
+
+			if(dtos.size() >0) {
+				returns = "";
+				for(RecipesDto dto :dtos) {
+					returns += dto.getName() +",";
+					returns += dto.getProof() +",";
+				}
+			}
+			
+		} catch (Exception e) {
+			returns = "error";
+			e.printStackTrace();
+		}
+		return returns;
+	}
+	public String selectFavoriteRecipe(String id, String keyWord) {
+		ArrayList<RecipesDto> dtos = new ArrayList<RecipesDto>();
+		String sql = "SELECT recipesname, proof FROM recipes "
+				+ "WHERE recipesname IN (SELECT recipesname FROM favorite WHERE userid='"+id+"') "
+						+ "AND recipesname LIKE '%"+keyWord+"%';";
+		String returns="fail";
+		try (
+			Connection con = getConnection();
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+		){
+			while(rs.next()) {
 				RecipesDto dto = new RecipesDto();
 				dto.setName(rs.getString("recipesname"));
 				dto.setProof(rs.getDouble("proof"));

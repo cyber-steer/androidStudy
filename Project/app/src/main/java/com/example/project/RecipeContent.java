@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ import com.example.project.manager.SessionManager;
 
 public class RecipeContent extends AppCompatActivity {
     Button btnLogout, btnBack;
-    LinearLayout memberLayout, nonMemberLayout;
+    LinearLayout memberLayout, nonMemberLayout, toolbarLayout;
     ImageView favorite;
     TextView toolbarName, userName;
     TextView tvName, tvContent, tvProof, tvMeterial, tvVoluem, tvFormalities;
@@ -46,6 +47,8 @@ public class RecipeContent extends AppCompatActivity {
         tvVoluem = findViewById(R.id.tvVoluem);
         tvFormalities = findViewById(R.id. tvFormalities);
         favorite = findViewById(R.id.favorite);
+        toolbarLayout = findViewById(R.id.toolbarLayout);
+
 
         String result = "";
         DbConect conect = new DbConect();
@@ -142,6 +145,9 @@ public class RecipeContent extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
         toolbarName.setText("레시피");
+        toolbarLayout.removeViewAt(3);
+        toolbarLayout.removeViewAt(2);
+        toolbarName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
 

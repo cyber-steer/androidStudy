@@ -8,7 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,10 +25,12 @@ import com.example.project.model.RecipesDto;
 import java.util.ArrayList;
 
 public class Favorite extends AppCompatActivity {
+    ImageView search;
     Button btnLogout;
     LinearLayout memberLayout, nonMemberLayout;
     ListView listView;
     TextView toolbarName, userName;
+    EditText etSearch;
     DrawerLayout drawerLayout;
 
     SessionManager sessionManager;
@@ -39,9 +44,6 @@ public class Favorite extends AppCompatActivity {
         toolbarName = findViewById(R.id.toolbarName);
         toolbarName.setText("즐겨찾기");
 
-        listView = findViewById(R.id.listView);
-        FavoriteAdapter adapter = new FavoriteAdapter();
-        listView.setAdapter(adapter);
 
         sessionManager = new SessionManager(getApplicationContext());
         userName = findViewById(R.id.nickName);
@@ -57,34 +59,24 @@ public class Favorite extends AppCompatActivity {
             nonMemberLayout.setVisibility(View.VISIBLE);
         }
 
-        ArrayList<RecipesDto> dtos = new ArrayList<>();
-        String result="";
-        DbConect conect = new DbConect();
-        try {
-            String id = sessionManager.getId();
-            result = conect.execute("selectFavorite","favorite",id).get();
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        if(result.equals("fail")){
-            Toast.makeText(this, "즐겨찾기한 레시피가 없습니다", Toast.LENGTH_SHORT).show();
-        }
-        else if(result.equals("error")){
-            Toast.makeText(this, "에러 벌생", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            String[] results = result.split(",");
-            for(int i=0; i<results.length;){
-                RecipesDto dto = new RecipesDto();
-                dto.setName(results[i++]);
-                dto.setProof(results[i++]);
-                dtos.add(dto);
-            }
-            for(RecipesDto dto : dtos){
-                adapter.addItem(dto);
-            }
-        }
+        String id = sessionManager.getId();
+        select("selectFavorite",id);
 
+        etSearch = findViewById(R.id.etSearch);
+        search = findViewById(R.id.search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String keyWord = etSearch.getText().toString().trim();
+                if (keyWord.equals("")){
+                    select("selectFavorite",id);
+                }
+                else{
+                    select("selectFavoriteRecipe",id, keyWord);
+                }
+
+            }
+        });
 
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -155,5 +147,43 @@ public class Favorite extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         MainActivity.closeDrawer(drawerLayout);
+    }
+    public void select(String ...strings){
+
+        listView = findViewById(R.id.listView);
+        FavoriteAdapter adapter = new FavoriteAdapter();
+        listView.setAdapter(adapter);
+
+        ArrayList<RecipesDto> dtos = new ArrayList<>();
+        String result="";
+        DbConect conect = new DbConect();
+        try {
+            if(strings[0].equals("selectFavorite")){
+                result = conect.execute("selectFavorite","favorite",strings[1]).get();
+            }
+            else if(strings[0].equals("selectFavoriteRecipe")){
+                result = conect.execute("selectFavoriteRecipe","favorite",strings[1],strings[2]).get();
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        if(result.equals("fail")){
+            Toast.makeText(this, "즐겨찾기한 레시피가 없습니다", Toast.LENGTH_SHORT).show();
+        }
+        else if(result.equals("error")){
+            Toast.makeText(this, "에러 벌생", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            String[] results = result.split(",");
+            for(int i=0; i<results.length;){
+                RecipesDto dto = new RecipesDto();
+                dto.setName(results[i++]);
+                dto.setProof(results[i++]);
+                dtos.add(dto);
+            }
+            for(RecipesDto dto : dtos){
+                adapter.addItem(dto);
+            }
+        }
     }
 }

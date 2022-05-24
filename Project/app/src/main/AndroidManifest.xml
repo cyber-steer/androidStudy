@@ -14,6 +14,10 @@
         android:theme="@style/Theme.Project"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".BoardInsert"
+            android:exported="false"
+            android:theme="@style/Theme.Project.NoActionBar" />
+        <activity
             android:name=".RecipesInsert"
             android:exported="false"
             android:theme="@style/Theme.Project.NoActionBar" />

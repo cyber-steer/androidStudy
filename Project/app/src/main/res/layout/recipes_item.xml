@@ -9,25 +9,33 @@
         android:id="@+id/tvName"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="에러"
-        android:textSize="30dp"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/tvProof"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="에러"
         android:textSize="30dp"
         android:textColor="@color/black"
-        android:gravity="right"/>
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvProof"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="에러"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:gravity="right"
+        android:layout_gravity="center"/>
 
     <ImageView
         android:id="@+id/favorite"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/ic_unstar" />
+        app:srcCompat="@drawable/ic_unstar"
+        android:layout_gravity="center" />
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:text="삭제"
+        android:textSize="20dp"
+        android:layout_gravity="center"/>
+
 </LinearLayout>
