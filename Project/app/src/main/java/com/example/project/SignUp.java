@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class SignUp extends AppCompatActivity {
     EditText et_id, et_nickName, et_pwd, et_pwdCheck;
     TextView toolbarName;
     DrawerLayout drawerLayout;
+    LinearLayout toolbarLayout;
 
     SessionManager sessionManager;
 
@@ -34,6 +36,10 @@ public class SignUp extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
         toolbarName.setText("회원가입");
+        toolbarLayout = findViewById(R.id.toolbarLayout);
+        toolbarLayout.removeViewAt(3);
+        toolbarLayout.removeViewAt(2);
+        toolbarName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         sessionManager = new SessionManager(getApplicationContext());
         btnSignUp = findViewById(R.id.bt_signUp);

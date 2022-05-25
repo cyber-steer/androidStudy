@@ -46,6 +46,8 @@ public class Recipes extends AppCompatActivity {
         toolbarName = findViewById(R.id.toolbarName);
         toolbarName.setText("레시피");
         tabLayout = findViewById(R.id.tabLayout);
+        btnAdd = findViewById(R.id.btnAdd);
+        btnDelete = findViewById(R.id.btnDelete);
 
         imgFavorite = (ImageView) findViewById(R.id.favorite);
 
@@ -62,6 +64,17 @@ public class Recipes extends AppCompatActivity {
         }else{
             memberLayout.setVisibility(View.INVISIBLE);
             nonMemberLayout.setVisibility(View.VISIBLE);
+        }
+        if(sessionManager.getId().equals("admin")){
+            btnAdd.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = btnAdd.getLayoutParams();
+            params.height = 150;
+            btnAdd.setLayoutParams(params);
+        }else{
+            btnAdd.setVisibility(View.INVISIBLE);
+            ViewGroup.LayoutParams params = btnAdd.getLayoutParams();
+            params.height = 0;
+            btnAdd.setLayoutParams(params);
         }
 
         Intent intent = getIntent();
@@ -99,7 +112,6 @@ public class Recipes extends AppCompatActivity {
             }
         });
 
-        btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

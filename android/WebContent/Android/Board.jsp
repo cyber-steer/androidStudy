@@ -7,6 +7,7 @@
 	String nickName = request.getParameter("nickName");
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
+	String id = request.getParameter("id");
 
 	BoardDao dao = new BoardDao();
 	
@@ -15,6 +16,12 @@
 	}
 	else if(type.equals("insertBoard")){
 		out.print(dao.insertBoard(nickName, title, content));
+	}
+	else if(type.equals("selectId")){
+		out.print(dao.select(id));
+	}
+	else if(type.equals("updateBoard")){
+		out.print(dao.updateBoard(id, title, content));
 	}
 
 %>

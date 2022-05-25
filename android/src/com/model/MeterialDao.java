@@ -57,11 +57,11 @@ public class MeterialDao {
 			}
 			returns = "";
 			for(MeterialDto dto : dtos) {
-				returns += dto.getMeterialname()+" "; 
+				returns += dto.getMeterialname()+"-"; 
 			}
 			returns += ",";
 			for(MeterialDto dto : dtos) {
-				returns += dto.getVoluem()+"ml ";
+				returns += dto.getVoluem()+"ml-";
 			}
 			
 		} catch (Exception e) {

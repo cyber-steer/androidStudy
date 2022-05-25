@@ -80,7 +80,12 @@ public class DbConect extends AsyncTask<String, Void, String> {
             }
             else if(strings[0].equals("insertBoard")){
                 sendMsg = "type="+strings[0]+"&nickName="+strings[2]+"&title="+strings[3]+"&content="+strings[4];
-
+            }
+            else if(strings[0].equals("selectId")){
+                sendMsg = "type="+strings[0]+"&id="+strings[2];
+            }
+            else if(strings[0].equals("updateBoard")){
+                sendMsg = "type="+strings[0]+"&id="+strings[2]+"&title="+strings[3]+"&content="+strings[4];
             }
             //--------------------------------------------------------------------------------------------------------
 

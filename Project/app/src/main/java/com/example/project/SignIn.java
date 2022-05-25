@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class SignIn extends AppCompatActivity {
     TextView toolbarName;
     DrawerLayout drawerLayout;
     SessionManager sessionManager;
+    LinearLayout toolbarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,10 @@ public class SignIn extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
         toolbarName.setText("로그인");
+        toolbarLayout = findViewById(R.id.toolbarLayout);
+        toolbarLayout.removeViewAt(3);
+        toolbarLayout.removeViewAt(2);
+        toolbarName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         sessionManager = new SessionManager(getApplicationContext());
 

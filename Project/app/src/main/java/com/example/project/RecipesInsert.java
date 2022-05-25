@@ -30,7 +30,7 @@ public class RecipesInsert extends AppCompatActivity {
     LinearLayout meterial, formalities;
     ArrayList<Integer[]> meterialId;
     ArrayList<Integer> formalitiesId;
-    Button btnLogout, btnSave, btnMeterialAdd, btnMeterialRemove,btnFormalitiesRemove,btnFormalitiesAdd;
+    Button btnLogout, btnSave, btnCancle, btnMeterialAdd, btnMeterialRemove,btnFormalitiesRemove,btnFormalitiesAdd;
     LinearLayout memberLayout, nonMemberLayout, toolbarLayout;
     TextView toolbarName, userName;
     EditText etBase, etVoluem, etBaseVoluem, etFormalities, etRecipesName,etRecipesProof, etRecipesContent;
@@ -233,6 +233,13 @@ public class RecipesInsert extends AppCompatActivity {
             }
         });
 
+        btnCancle = findViewById(R.id.btnCancle);
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Recipes.class));
+            }
+        });
 
         userName = findViewById(R.id.nickName);
         memberLayout = findViewById(R.id.memberLayout);

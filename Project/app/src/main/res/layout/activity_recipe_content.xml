@@ -145,12 +145,27 @@
                         android:text="첫번째입니다\n두번째\n세번째\n"
                         android:layout_marginRight="20dp"/>
                 </LinearLayout>
-                <Button
-                    android:id="@+id/btnBack"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="뒤로가기"/>
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <Button
+                        android:id="@+id/btnBack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:text="뒤로가기"/>
+                    <Button
+                        android:id="@+id/btnUpdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="10dp"
+                        android:text="수정하기"/>
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
 

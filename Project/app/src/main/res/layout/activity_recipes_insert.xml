@@ -224,11 +224,26 @@
                     android:layout_height="1dp"
                     android:src="@drawable/line"
                     android:layout_marginVertical="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnCancle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="취소"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"/>
                 <Button
                     android:id="@+id/btnSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="저장"/>
+                    android:text="저장"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
         </ScrollView>

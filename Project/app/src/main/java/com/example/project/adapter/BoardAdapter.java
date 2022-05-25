@@ -1,13 +1,18 @@
 package com.example.project.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.project.BoardContent;
+import com.example.project.BoardContentUser;
 import com.example.project.R;
+import com.example.project.manager.DbConect;
+import com.example.project.manager.SessionManager;
 import com.example.project.model.BoardDto;
 
 import java.util.ArrayList;
@@ -46,6 +51,32 @@ public class BoardAdapter extends BaseAdapter {
         nickname.setText(dto.getNickName());
         date.setText(dto.getDate().replace("/"," "));
 
+        SessionManager sessionManager= new SessionManager(viewGroup.getContext());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DbConect conect = new DbConect();
+                String result = "";
+                try{
+                    result = conect.execute("selectId","board",dto.getId()+"").get();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                String nickname = result.split(",")[1];
+                System.out.println("id : "+sessionManager.getNickName());
+                System.out.println("id : "+nickname);
+                if(sessionManager.getNickName().equals(nickname)){
+                    Intent intent = new Intent(viewGroup.getContext(), BoardContentUser.class);
+                    intent.putExtra("id",dto.getId());
+                    viewGroup.getContext().startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(viewGroup.getContext(), BoardContent.class);
+                    intent.putExtra("id",dto.getId());
+                    viewGroup.getContext().startActivity(intent);
+                }
+            }
+        });
         return view;
     }
     public void addItem(BoardDto dto){

@@ -49,8 +49,10 @@ public class FormalitiesDao {
 			ResultSet rs = stmt.executeQuery(sql); 
 		){
 			returns ="";
+			int i =1;
 			while(rs.next()) {
-				returns += rs.getString("content")+" ";
+				returns += i+"."+rs.getString("content")+"-";
+				i++;
 			}
 			
 		} catch (Exception e) {

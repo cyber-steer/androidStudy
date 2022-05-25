@@ -107,6 +107,19 @@ public class RecipesAdapter extends BaseAdapter {
         });
 
         Button btnDelete = view.findViewById(R.id.btnDelete);
+
+        if(sessionManager.getId().equals("admin")){
+            btnDelete.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = btnDelete.getLayoutParams();
+            params.width =200;
+            btnDelete.setLayoutParams(params);
+        }else{
+            btnDelete.setVisibility(View.INVISIBLE);
+            btnDelete.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = btnDelete.getLayoutParams();
+            params.width =0;
+            btnDelete.setLayoutParams(params);
+        }
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

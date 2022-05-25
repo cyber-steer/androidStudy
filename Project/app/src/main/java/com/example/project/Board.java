@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -39,6 +40,7 @@ public class Board extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
         toolbarName.setText("게시판");
+        btnAdd = findViewById(R.id.btnAdd);
 
         sessionManager = new SessionManager(getApplicationContext());
 
@@ -56,8 +58,17 @@ public class Board extends AppCompatActivity {
             memberLayout.setVisibility(View.INVISIBLE);
             nonMemberLayout.setVisibility(View.VISIBLE);
         }
-
-        btnAdd = findViewById(R.id.btnAdd);
+        if(sessionManager.getLogin()){
+            btnAdd.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = btnAdd.getLayoutParams();
+            params.height = 150;
+            btnAdd.setLayoutParams(params);
+        }else{
+            btnAdd.setVisibility(View.INVISIBLE);
+            ViewGroup.LayoutParams params = btnAdd.getLayoutParams();
+            params.height = 0;
+            btnAdd.setLayoutParams(params);
+        }
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,15 +190,15 @@ public class Board extends AppCompatActivity {
         else if(result.equals("error")){
             Toast.makeText(this, "에러 발생", Toast.LENGTH_SHORT).show();
         }
-        else if(result.equals("")){
-            Toast.makeText(this, "ㅈ됨", Toast.LENGTH_SHORT).show();
-        }
         else{
             String[] title = result.split(",")[0].split(" ");
             String[] nickName = result.split(",")[1].split(" ");
             String[] date = result.split(",")[2].split(" ");
+            String[] id = result.split(",")[3].split(" ");
+
             for(int i=0;i<title.length;i++){
                 BoardDto dto = new BoardDto();
+                dto.setId(Integer.parseInt(id[i]));
                 dto.setTitle(title[i]);
                 dto.setNickName(nickName[i]);
                 dto.setDate(date[i]);

@@ -11,13 +11,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.project.manager.DbConect;
 import com.example.project.manager.SessionManager;
 
-public class Info extends AppCompatActivity {
-    Button btnLogout;
+public class BoardContent extends AppCompatActivity {
+    Button btnLogout, btnBack;
     LinearLayout memberLayout, nonMemberLayout, toolbarLayout;
-    TextView toolbarName, userName;
+    TextView toolbarName, userName, tvTitle, tvNickName, tvDate, tvContent;
     DrawerLayout drawerLayout;
 
     SessionManager sessionManager;
@@ -25,11 +27,11 @@ public class Info extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
+        setContentView(R.layout.activity_board_content);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
-        toolbarName.setText("정보");
+        toolbarName.setText("게시판");
         toolbarLayout = findViewById(R.id.toolbarLayout);
         toolbarLayout.removeViewAt(3);
         toolbarLayout.removeViewAt(2);
@@ -50,6 +52,46 @@ public class Info extends AppCompatActivity {
             nonMemberLayout.setVisibility(View.VISIBLE);
         }
 
+        tvTitle = findViewById(R.id.tvTitle);
+        tvNickName = findViewById(R.id.tvNickName);
+        tvDate = findViewById(R.id.tvDate);
+        tvContent = findViewById(R.id.tvContent);
+
+        Intent intent = getIntent();
+        int boardId = intent.getIntExtra("id", -1);
+
+        String result="";
+        DbConect conect = new DbConect();
+        try{
+            result = conect.execute("selectId","board",boardId+"").get();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(result.equals("fail")){
+            Toast.makeText(this, "검색 실패", Toast.LENGTH_SHORT).show();
+        }
+        else if(result.equals("error")){
+            Toast.makeText(this, "에러 발생", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            String title = result.split(",")[0];
+            String nickname = result.split(",")[1];
+            String date = result.split(",")[2].replace("/"," ");
+            String content = result.split(",")[3];
+
+            tvTitle.setText(title);
+            tvNickName.setText(nickname);
+            tvDate.setText(date);
+            tvContent.setText(content);
+        }
+
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Board.class));
+            }
+        });
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,10 +169,10 @@ public class Info extends AppCompatActivity {
     }
 
     public void ClickBoard(View view){
-        MainActivity.redirectActivity(this, Info.class);
+        MainActivity.redirectActivity(this, Board.class);
     }
     public void ClickInfo(View view){
-        recreate();
+        MainActivity.redirectActivity(this, Info.class);
     }
 
     public void ClickExit(View view){

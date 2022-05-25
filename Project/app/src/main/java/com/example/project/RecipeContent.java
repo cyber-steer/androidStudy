@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ import com.example.project.manager.DbConect;
 import com.example.project.manager.SessionManager;
 
 public class RecipeContent extends AppCompatActivity {
-    Button btnLogout, btnBack;
+    Button btnLogout, btnBack, btnUpdate;
     LinearLayout memberLayout, nonMemberLayout, toolbarLayout;
     ImageView favorite;
     TextView toolbarName, userName;
@@ -47,7 +48,6 @@ public class RecipeContent extends AppCompatActivity {
         tvVoluem = findViewById(R.id.tvVoluem);
         tvFormalities = findViewById(R.id. tvFormalities);
         favorite = findViewById(R.id.favorite);
-        toolbarLayout = findViewById(R.id.toolbarLayout);
 
 
         String result = "";
@@ -69,13 +69,13 @@ public class RecipeContent extends AppCompatActivity {
             String recipeName = msg[0];
             String recipeContent = msg[1];
             String recipeProof = msg[2];
-            String recipeMeterial = msg[3].replace(" ", "\n");
-            String recipeVoluem = msg[4].replace(" ","\n");
-            String recipeFormalities = msg[5].replace(" ", "\n");
+            String recipeMeterial = msg[3].replace("-", "\n");
+            String recipeVoluem = msg[4].replace("-","\n");
+            String recipeFormalities = msg[5].replace("-", "\n");
 
             tvName.setText(recipeName);
             tvContent.setText(recipeContent);
-            tvProof.setText(recipeProof);
+            tvProof.setText(recipeProof+"%");
             tvMeterial.setText(recipeMeterial);
             tvVoluem.setText(recipeVoluem);
             tvFormalities.setText(recipeFormalities);
@@ -145,6 +145,7 @@ public class RecipeContent extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbarName = findViewById(R.id.toolbarName);
         toolbarName.setText("레시피");
+        toolbarLayout = findViewById(R.id.toolbarLayout);
         toolbarLayout.removeViewAt(3);
         toolbarLayout.removeViewAt(2);
         toolbarName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -163,7 +164,25 @@ public class RecipeContent extends AppCompatActivity {
             memberLayout.setVisibility(View.INVISIBLE);
             nonMemberLayout.setVisibility(View.VISIBLE);
         }
+        btnUpdate = findViewById(R.id.btnUpdate);
+        if(sessionManager.getId().equals("admin")){
+            btnUpdate.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = btnUpdate.getLayoutParams();
+            params.width = 1000;
+            btnUpdate.setLayoutParams(params);
+        }
+        else{
+            btnUpdate.setVisibility(View.VISIBLE);
+            ViewGroup.LayoutParams params = btnUpdate.getLayoutParams();
+            params.width = 0;
+            btnUpdate.setLayoutParams(params);
+        }
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
         btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +261,7 @@ public class RecipeContent extends AppCompatActivity {
     }
 
     public void ClickBoard(View view){
-        recreate();
+        MainActivity.redirectActivity(this,Board.class);
     }
     public void ClickInfo(View view){
         MainActivity.redirectActivity(this, Info.class);
