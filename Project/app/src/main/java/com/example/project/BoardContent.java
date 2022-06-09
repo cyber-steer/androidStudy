@@ -10,11 +10,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project.adapter.CommentAdapter;
 import com.example.project.manager.DbConect;
 import com.example.project.manager.SessionManager;
+import com.example.project.model.CommentDto;
 
 public class BoardContent extends AppCompatActivity {
     Button btnLogout, btnBack;
@@ -120,6 +123,18 @@ public class BoardContent extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+
+        ListView listView = findViewById(R.id.listView);
+        CommentAdapter adapter = new CommentAdapter();
+        listView.setAdapter(adapter);
+
+        for(int i=0;i<3;i++){
+            CommentDto dto = new CommentDto();
+            dto.setNickName("관리자");
+            dto.setDate("2022-5-26");
+            dto.setContent("내용"+(i+1));
+            adapter.addItem(dto);
+        }
     }
 
     public void ClickMenu(View view){
@@ -162,6 +177,9 @@ public class BoardContent extends AppCompatActivity {
     }
     public void ClickSignUp(View view){
         MainActivity.redirectActivity(this,SignUp.class);
+    }
+    public void ClickUserUpdate(View view){
+        MainActivity.redirectActivity(this,UserUpdate.class);
     }
 
     public void ClickHome(View view){

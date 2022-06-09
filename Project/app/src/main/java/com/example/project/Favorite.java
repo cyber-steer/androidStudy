@@ -131,6 +131,9 @@ public class Favorite extends AppCompatActivity {
     public void ClickHome(View view){
         MainActivity.redirectActivity(this, MainActivity.class);
     }
+    public void ClickUserUpdate(View view){
+        MainActivity.redirectActivity(this,UserUpdate.class);
+    }
 
     public void ClickBoard(View view){
         MainActivity.redirectActivity(this, Board.class);

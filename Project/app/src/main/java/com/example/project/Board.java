@@ -149,6 +149,9 @@ public class Board extends AppCompatActivity {
     public void ClickHome(View view){
         MainActivity.redirectActivity(this, MainActivity.class);
     }
+    public void ClickUserUpdate(View view){
+        MainActivity.redirectActivity(this,UserUpdate.class);
+    }
     public void ClickSignIn(View view){
         MainActivity.redirectActivity(this,SignIn.class);
     }

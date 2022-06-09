@@ -205,6 +205,9 @@ public class MainActivity extends AppCompatActivity {
     public void ClickSignUp(View view){
         redirectActivity(this,SignUp.class);
     }
+    public void ClickUserUpdate(View view){
+        redirectActivity(this,UserUpdate.class);
+    }
 
     public void ClickInfo(View view){
         redirectActivity(this, Info.class);

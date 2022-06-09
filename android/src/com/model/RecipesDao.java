@@ -53,7 +53,7 @@ public class RecipesDao {
 	}
 	public String selectRecipe(String keyWord) {
 		ArrayList<RecipesDto> dtos = new ArrayList<RecipesDto>();
-		String sql = "SELECT * FROM recipes WHERE recipesname LIKE '%"+keyWord+"%';;";
+		String sql = "SELECT * FROM recipes WHERE recipesname LIKE '%"+keyWord+"%';";
 		String returns="fail";
 		try (
 			Connection con = getConnection();

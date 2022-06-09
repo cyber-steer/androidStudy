@@ -220,6 +220,9 @@ public class Recipes extends AppCompatActivity {
     public void ClickBoard(View view){
         MainActivity.redirectActivity(this, Board.class);
     }
+    public void ClickUserUpdate(View view){
+        MainActivity.redirectActivity(this,UserUpdate.class);
+    }
     public void ClickInfo(View view){
         MainActivity.redirectActivity(this,Info.class);
     }

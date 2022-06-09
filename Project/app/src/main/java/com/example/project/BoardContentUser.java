@@ -156,6 +156,9 @@ public class BoardContentUser extends AppCompatActivity {
     public void ClickSignUp(View view){
         MainActivity.redirectActivity(this,SignUp.class);
     }
+    public void ClickUserUpdate(View view){
+        MainActivity.redirectActivity(this,UserUpdate.class);
+    }
 
     public void ClickHome(View view){
         MainActivity.redirectActivity(this, MainActivity.class);

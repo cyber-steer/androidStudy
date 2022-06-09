@@ -224,6 +224,9 @@ public class RecipeContent extends AppCompatActivity {
     public void ClickRecipes(View view){
         MainActivity.redirectActivity(this,Recipes.class);
     }
+    public void ClickUserUpdate(View view){
+        MainActivity.redirectActivity(this,UserUpdate.class);
+    }
     public void ClickFavorite(View view){
         if(sessionManager.getLogin()){
             MainActivity.redirectActivity(this,Favorite.class);

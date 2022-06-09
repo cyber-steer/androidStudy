@@ -118,6 +118,9 @@ public class Info extends AppCompatActivity {
     public void ClickSignIn(View view){
         MainActivity.redirectActivity(this,SignIn.class);
     }
+    public void ClickUserUpdate(View view){
+        MainActivity.redirectActivity(this,UserUpdate.class);
+    }
     public void ClickSignUp(View view){
         MainActivity.redirectActivity(this,SignUp.class);
     }
